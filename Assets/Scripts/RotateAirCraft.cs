@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RotateAirCraft : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class RotateAirCraft : MonoBehaviour
     public bool MoveForward => angleNow == 360;
 
     public bool AngleLimit => angleNow == angleTarget;
+
+    public Action<float> changeAngleEvent;
 
     private void Start()
     {
@@ -37,10 +40,12 @@ public class RotateAirCraft : MonoBehaviour
         {
             if (angleNow > angleTarget) angleNow -= speedRotation * Time.deltaTime;
             else angleNow += speedRotation * Time.deltaTime;
+            
         }
         else 
-            angleNow = angleTarget;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));        
+            angleNow = angleTarget;        
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+        changeAngleEvent?.Invoke(angleNow);
     } 
 
     public bool NextAngle(int val = 1)

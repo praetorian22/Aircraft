@@ -9,6 +9,7 @@ public class ControlAlly : MonoBehaviour
     public RotateAirCraft rotateAirCraft;
     public GameObject enemyAirCraft;
     public RotateAirCraft enemyRotateAirCraft;
+    public RotateArrow rotateArrow;
 
     public figure nowFigure;
     public float time;
@@ -21,11 +22,13 @@ public class ControlAlly : MonoBehaviour
 
     private void Start()
     {
+        rotateArrow = GetComponent<RotateArrow>();
+        rotateAirCraft.changeAngleEvent += rotateArrow.TranslateAngle;
         enemyRotateAirCraft = enemyAirCraft.GetComponent<RotateAirCraft>();
-        NewSimulation();
+        NewSimulation();        
     }
 
-
+    
 
     public void NewSimulation()
     {
