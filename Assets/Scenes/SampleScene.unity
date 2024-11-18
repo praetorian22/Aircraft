@@ -2217,6 +2217,8 @@ MonoBehaviour:
   vertical_speed: {fileID: 8300000, guid: 000922bdfbd20094ba7477be7dfd32ff, type: 3}
   climb_climb: {fileID: 8300000, guid: 2d555365de6949f46a5bfb8a9afa6dcd, type: 3}
   descent_descent: {fileID: 8300000, guid: 1cd5ce999142a9b4f8bf0deaec0b1315, type: 3}
+  crossing_climb: {fileID: 8300000, guid: ec176994c6616a9409424caf4de1136e, type: 3}
+  crossing_descent: {fileID: 8300000, guid: d087c77ffe1e8f14f8b997cd46887563, type: 3}
 --- !u!1 &1281411113
 GameObject:
   m_ObjectHideFlags: 0
