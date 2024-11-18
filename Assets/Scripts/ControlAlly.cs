@@ -19,7 +19,7 @@ public class ControlAlly : MonoBehaviour
     public bool changeTargetFlag;
     public float distanceAir;
 
-
+    public Animator animator;
     private void Start()
     {
         rotateArrow = GetComponent<RotateArrow>();
@@ -40,6 +40,7 @@ public class ControlAlly : MonoBehaviour
         rotateAirCraft.speedRotation = 4;
         if (timeCoro != null) StopCoroutine(timeCoro);
         timeCoro = StartCoroutine(TimeCoroutine());
+        animator.SetTrigger("Start");
     }
 
     public IEnumerator TimeCoroutine()
@@ -85,7 +86,11 @@ public class ControlAlly : MonoBehaviour
             }
             if (time <= 20 && time > 15) nowFigure = figure.yelowCircle;
             if (time <= 15 && !notDangerous) nowFigure = figure.redSquare;
-            if (notDangerous) nowFigure = figure.emptyDiamond;
+            if (notDangerous)
+            {
+                nowFigure = figure.emptyDiamond;
+                animator.SetTrigger("Stop");
+            }
 
             if (enemyAirCraft.transform.position.x > gameObject.transform.position.x)
             {

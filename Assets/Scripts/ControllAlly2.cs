@@ -24,6 +24,7 @@ public class ControllAlly2 : MonoBehaviour
     public float distanceAir;
 
     public bool changeTargetFlag;
+    public Animator animator;
 
     private void OnEnable()
     {
@@ -62,7 +63,8 @@ public class ControllAlly2 : MonoBehaviour
     {
         nowFigure = figure.emptyDiamond;
         time = 30f;
-        expansionSpeed = 0f;        
+        expansionSpeed = 0f;
+        animator.SetTrigger("Start");
     }
 
     private void Start()
@@ -86,7 +88,11 @@ public class ControllAlly2 : MonoBehaviour
             }
             if (time <= 20 && time > 15) nowFigure = figure.yelowCircle;
             if (time <= 15 && !notDangerous) nowFigure = figure.redSquare;
-            if (notDangerous) nowFigure = figure.emptyDiamond;
+            if (notDangerous)
+            {
+                animator.SetTrigger("Stop");
+                nowFigure = figure.emptyDiamond;
+            }
             distanceAir = Mathf.Abs(enemyAirCraft.transform.position.x) + Mathf.Abs(gameObject.transform.position.x);
 
             if ((int)nowFigure > 0)
