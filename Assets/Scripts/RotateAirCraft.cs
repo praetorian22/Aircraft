@@ -20,6 +20,12 @@ public class RotateAirCraft : MonoBehaviour
 
     public Action<float> changeAngleEvent;
 
+    public GameObject backPoint;
+    public GameObject forwardPoint;
+
+    public float vertPositionB => backPoint.transform.position.y;
+    public float vertPositionF => forwardPoint.transform.position.y;
+
     private void Start()
     {
         angleNow = targetAngleList[6];
@@ -44,7 +50,7 @@ public class RotateAirCraft : MonoBehaviour
         }
         else 
             angleNow = angleTarget;        
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));        
         changeAngleEvent?.Invoke(angleNow);
     } 
 
