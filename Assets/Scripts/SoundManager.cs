@@ -14,6 +14,15 @@ public class SoundManager : MonoBehaviour
     public AudioClip descent_descent;
     public AudioClip crossing_climb;
     public AudioClip crossing_descent;
+    public AudioClip increase_climb;
+    public AudioClip increase_descent;
+    public AudioClip climb_climp_now;
+    public AudioClip descent_descent_now;
+
+    public void NewSimulation()
+    {
+        typeTrack = typeTrack.none;
+    }
 
     private void MakeSound(AudioClip original, Vector3 position)
     {
@@ -54,6 +63,22 @@ public class SoundManager : MonoBehaviour
     {
         if (typeTrack != typeTrack.crossing_descent) MakeSoundCicle(crossing_descent);
     }
+    public void SoundIncrease_Climp()
+    {
+        if (typeTrack != typeTrack.increase_climb) MakeSoundCicle(increase_climb);
+    }
+    public void SoundIncrease_Descent()
+    {
+        if (typeTrack != typeTrack.increase_descent) MakeSoundCicle(increase_descent);
+    }
+    public void SoundClimb_Climp_Now()
+    {
+        if (typeTrack != typeTrack.climb_climp_now) MakeSoundCicle(climb_climp_now);
+    }
+    public void SoundDescent_Descent_Now()
+    {
+        if (typeTrack != typeTrack.descent_descent_now) MakeSoundCicle(descent_descent_now);
+    }
 }
 
 public enum typeTrack
@@ -64,4 +89,10 @@ public enum typeTrack
     descent_descent,
     crossing_descent,
     crossing_climb,
+    increase_climb,
+    increase_descent,
+    climb_climp_now,
+    descent_descent_now,
+    clear_of_conflict,
+    none,
 }

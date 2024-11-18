@@ -50,6 +50,7 @@ public class ControlAlly : MonoBehaviour
         if (timeCoro != null) StopCoroutine(timeCoro);
         timeCoro = StartCoroutine(TimeCoroutine());
         animator.SetTrigger("Start");
+        soundManager.NewSimulation();
         soundManager.SoundTraffic_Traffic();
     }
 
@@ -72,14 +73,14 @@ public class ControlAlly : MonoBehaviour
                     if (random == 0)
                     {
                         SetTargetUp(true);
-                        SetTargetUp(true);
-                        soundManager.SoundCrossing_Climb();
+                        SetTargetUp(true);                        
+                        soundManager.SoundDescent_Descent();
                     }                       
                     else
                     {
                         SetTargetUp(false);
                         SetTargetUp(false);
-                        soundManager.SoundCrossing_Descent();
+                        soundManager.SoundClimb_Climb();
                     }                        
                     
                 }
@@ -88,14 +89,14 @@ public class ControlAlly : MonoBehaviour
                     if (enemyRotateAirCraft.MoveDown)
                     {
                         SetTargetUp(false);
-                        soundManager.SoundDescent_Descent();
+                        soundManager.SoundClimb_Climb(); 
                     }
                     else
                     {
                         if (enemyRotateAirCraft.MoveUp)
                         {
                             SetTargetUp(true);
-                            soundManager.SoundClimb_Climb();
+                            soundManager.SoundDescent_Descent();
                         }
                     }
                 }
@@ -146,7 +147,7 @@ public class ControlAlly : MonoBehaviour
                 dist.Add(Mathf.Abs(rotateAirCraft.vertPositionB - enemyRotateAirCraft.vertPositionF));
                 dist.Add(Mathf.Abs(rotateAirCraft.vertPositionF - enemyRotateAirCraft.vertPositionF));
                 vertDist = dist.Min();
-                if (vertDist > 1f)
+                if (vertDist > 1f && rotateAirCraft.index != 6)
                 {
                     SetTargetZero();
                     soundManager.SoundVertical_Speed();
@@ -178,21 +179,33 @@ public class ControlAlly : MonoBehaviour
 
     public bool SetTargetUp(bool up)
     {
+        bool next;
         if (up)
         {
             targetUp = true;
-            return rotateAirCraft.NextAngle();            
+            next = rotateAirCraft.NextAngle();
+            if (next && rotateAirCraft.angleTarget > 370 && !changeTargetFlag) soundManager.SoundIncrease_Descent();             
         }
         else
         {
             targetUp = false;
-            return rotateAirCraft.PrewAngle();            
+            next = rotateAirCraft.PrewAngle();
+            if (next && rotateAirCraft.angleTarget < 350 && !changeTargetFlag) soundManager.SoundIncrease_Climp();                        
         }
+        return next;
     }
     public void ChangeTarget()
     {
-        if (targetUp) SetTargetUp(false);
-        else SetTargetUp(true);
+        if (targetUp)
+        {
+            SetTargetUp(false);
+            soundManager.SoundClimb_Climp_Now();
+        }
+        else
+        {
+            SetTargetUp(true);
+            soundManager.SoundDescent_Descent_Now();
+        }
     }
 }
 
