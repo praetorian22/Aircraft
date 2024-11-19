@@ -13,6 +13,7 @@ public class ControlAlly : MonoBehaviour
     public RotateAirCraft enemyRotateAirCraft;
     public RotateArrow rotateArrow;
     public SoundManager soundManager;
+    public ColorSector colorSector;
 
     public figure nowFigure;
     public float time;
@@ -31,6 +32,7 @@ public class ControlAlly : MonoBehaviour
     {
         rotateArrow = GetComponent<RotateArrow>();
         soundManager = GetComponent<SoundManager>();
+        colorSector = GetComponent<ColorSector>();
         rotateAirCraft.changeAngleEvent += rotateArrow.TranslateAngle;
         enemyRotateAirCraft = enemyAirCraft.GetComponent<RotateAirCraft>();
         NewSimulation();        
@@ -46,7 +48,7 @@ public class ControlAlly : MonoBehaviour
         expansionSpeed = 0f;
         changeTargetFlag = false;
         notDangerous = false;
-        rotateAirCraft.speedRotation = 4;
+        rotateAirCraft.speedRotation = 3;
         if (timeCoro != null) StopCoroutine(timeCoro);
         timeCoro = StartCoroutine(TimeCoroutine());
         animator.SetTrigger("Start");
@@ -72,15 +74,17 @@ public class ControlAlly : MonoBehaviour
                     int random = Random.Range(0, 2);
                     if (random == 0)
                     {
-                        SetTargetUp(true);
-                        SetTargetUp(true);                        
+                        SetTarget(true);
+                        SetTarget(true);                        
                         soundManager.SoundDescent_Descent();
+                        colorSector.DescentDescent_IncreaseDescent(rotateAirCraft.angleTarget);
                     }                       
                     else
                     {
-                        SetTargetUp(false);
-                        SetTargetUp(false);
+                        SetTarget(false);
+                        SetTarget(false);
                         soundManager.SoundClimb_Climb();
+                        colorSector.ClimbClimb_IncreaseClimb(rotateAirCraft.angleTarget);
                     }                        
                     
                 }
@@ -88,15 +92,17 @@ public class ControlAlly : MonoBehaviour
                 {
                     if (enemyRotateAirCraft.MoveDown)
                     {
-                        SetTargetUp(false);
-                        soundManager.SoundClimb_Climb(); 
+                        SetTarget(false);
+                        soundManager.SoundClimb_Climb();
+                        colorSector.ClimbClimb_IncreaseClimb(rotateAirCraft.angleTarget);
                     }
                     else
                     {
                         if (enemyRotateAirCraft.MoveUp)
                         {
-                            SetTargetUp(true);
+                            SetTarget(true);
                             soundManager.SoundDescent_Descent();
+                            colorSector.DescentDescent_IncreaseDescent(rotateAirCraft.angleTarget);
                         }
                     }
                 }
@@ -151,17 +157,59 @@ public class ControlAlly : MonoBehaviour
                 {
                     SetTargetZero();
                     soundManager.SoundVertical_Speed();
+                    colorSector.SetMonitorVerticalSpeed(targetUp);
                 }
                 distanceAir = Mathf.Abs(enemyAirCraft.transform.position.x) + Mathf.Abs(gameObject.transform.position.x);
+                /*
+                if (vertDist < 1f && rotateAirCraft.AngleLimit && expansionSpeedDelta >= 0)
+                {
+                    if (distanceAir > 4f)
+                    {
+                        if (rotateAirCraft.angleNow <= enemyRotateAirCraft.angleNow)
+                        {
+                            //if (targetUp)
+                            //{
+                                if (enemyRotateAirCraft.angleNow - rotateAirCraft.angleNow > 5)
+                                {
+                                    rotateAirCraft.PrewAngle();
+                                }
+                                else
+                                {
+                                    rotateAirCraft.NextAngle();
+                                }
+                            //}                            
+                        }
+                        else
+                        {
+                            if (rotateAirCraft.angleNow >= enemyRotateAirCraft.angleNow)
+                            {
+                                //if (!targetUp)
+                                //{
+                                    if (rotateAirCraft.angleNow - enemyRotateAirCraft.angleNow > 5)
+                                    {
+                                        rotateAirCraft.NextAngle();                                        
+                                    }
+                                    else
+                                    {
+                                        rotateAirCraft.PrewAngle();
+                                    }
+                                //}
+                            }                            
+                        }
+
+                    }
+                }
+                */
                 if (expansionSpeedDelta >= -0.0005f && rotateAirCraft.AngleLimit)
                 {
-                    if (!SetTargetUp(targetUp) && !changeTargetFlag && distanceAir > 4f && expansionSpeedDelta > -0.005f)
+                    if (!SetTarget(targetUp) && !changeTargetFlag && distanceAir > 4f && expansionSpeedDelta > -0.005f)
                     {
                         ChangeTarget();
                         changeTargetFlag = true;
                         rotateAirCraft.speedRotation += 4;
                     }
                 }
+                
             }
             figureObject.sprite = figures[(int)nowFigure];
         }
@@ -177,20 +225,28 @@ public class ControlAlly : MonoBehaviour
         rotateAirCraft.AngleZero();
     }
 
-    public bool SetTargetUp(bool up)
+    public bool SetTarget(bool up)
     {
         bool next;
         if (up)
         {
             targetUp = true;
             next = rotateAirCraft.NextAngle();
-            if (next && rotateAirCraft.angleTarget > 370 && !changeTargetFlag) soundManager.SoundIncrease_Descent();             
+            if (next && rotateAirCraft.angleTarget > 370 && !changeTargetFlag)
+            {
+                soundManager.SoundIncrease_Descent();
+                colorSector.DescentDescent_IncreaseDescent(rotateAirCraft.angleTarget);
+            }
         }
         else
         {
             targetUp = false;
             next = rotateAirCraft.PrewAngle();
-            if (next && rotateAirCraft.angleTarget < 350 && !changeTargetFlag) soundManager.SoundIncrease_Climp();                        
+            if (next && rotateAirCraft.angleTarget < 350 && !changeTargetFlag)
+            {
+                soundManager.SoundIncrease_Climp();
+                colorSector.ClimbClimb_IncreaseClimb(rotateAirCraft.angleTarget);
+            }
         }
         return next;
     }
@@ -198,15 +254,19 @@ public class ControlAlly : MonoBehaviour
     {
         if (targetUp)
         {
-            SetTargetUp(false);
+            SetTarget(false);
             soundManager.SoundClimb_Climp_Now();
+            colorSector.Climb_ClimbNow();
         }
         else
         {
-            SetTargetUp(true);
+            SetTarget(true);
             soundManager.SoundDescent_Descent_Now();
+            colorSector.Descent_DescentNow();
         }
     }
+
+
 }
 
 public enum figure
