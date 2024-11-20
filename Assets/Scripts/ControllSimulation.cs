@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class ControllSimulation : MonoBehaviour
 {
-    public bool isPause;
-    public GameObject pointAirEnemy;
-    public GameObject pointAirAlly;
-    public GameObject airEnemy;
-    public GameObject airAlly;
+    private bool isPause;
+    [SerializeField] private GameObject pointAirEnemy;
+    [SerializeField] private GameObject pointAirAlly;
+    [SerializeField] private GameObject airEnemy;
+    [SerializeField] private GameObject airAlly;
 
     private Coroutine testPressCoro;
+    private UIManager uIManager;
+    private SoundManager soundManager;
     public void PressPause()
     {
         if (!isPause)
@@ -23,6 +25,12 @@ public class ControllSimulation : MonoBehaviour
             Time.timeScale = 1f;
             isPause = false;
         }
+    }
+
+    private void Awake()
+    {
+        soundManager = GetComponent<SoundManager>();
+        uIManager = GetComponent<UIManager>();
     }
 
     private void Start()
@@ -43,28 +51,28 @@ public class ControllSimulation : MonoBehaviour
 
     public void GOTPress()
     {
-        UIManager.Instance.SPSVButtonPressed(typeButtonSPSV.√Œ“);
-        UIManager.Instance.AllIndicatorsOff();
-        UIManager.Instance.FiguraOff();
-        SoundManager.Instance.SoundOff();
+        uIManager.SPSVButtonPressed(typeButtonSPSV.√Œ“);
+        uIManager.AllIndicatorsOff();
+        uIManager.FiguraOff();
+        soundManager.SoundOff();
     }
     public void TAPress()
     {
-        UIManager.Instance.SPSVButtonPressed(typeButtonSPSV.TA);
-        UIManager.Instance.AllIndicatorsOff();
-        UIManager.Instance.FiguraOn();
-        UIManager.Instance.RedSquareOff();
-        SoundManager.Instance.SoundOn();
-        SoundManager.Instance.TaSPSVOn();
+        uIManager.SPSVButtonPressed(typeButtonSPSV.TA);
+        uIManager.AllIndicatorsOff();
+        uIManager.FiguraOn();
+        uIManager.RedSquareOff();
+        soundManager.SoundOn();
+        soundManager.TaSPSVOn();
     }
     public void T_RAPress()
     {
-        UIManager.Instance.SPSVButtonPressed(typeButtonSPSV.T_RA);
-        UIManager.Instance.AllIndicatorsOn();
-        UIManager.Instance.FiguraOn();
-        UIManager.Instance.RedSquareOn();
-        SoundManager.Instance.SoundOn();
-        SoundManager.Instance.TaSPSVOff();
+        uIManager.SPSVButtonPressed(typeButtonSPSV.T_RA);
+        uIManager.AllIndicatorsOn();
+        uIManager.FiguraOn();
+        uIManager.RedSquareOn();
+        soundManager.SoundOn();
+        soundManager.TaSPSVOff();
     }
     public void TestPress()
     {
@@ -74,9 +82,9 @@ public class ControllSimulation : MonoBehaviour
     private IEnumerator TestPressCoro()
     {
         yield return new WaitForSeconds(5f);
-        UIManager.Instance.SPSVTestButtonOn();
+        uIManager.SPSVTestButtonOn();
         yield return new WaitForSeconds(1f);
-        UIManager.Instance.SPSVTestButtonOff();
+        uIManager.SPSVTestButtonOff();
         testPressCoro = null;
     }
 }

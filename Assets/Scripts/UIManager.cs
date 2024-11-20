@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : GenericSingletonClass<UIManager>
+public class UIManager : MonoBehaviour
 {
     [SerializeField] Button controllUpButton;
     [SerializeField] Button controllDownButton;
@@ -15,7 +15,7 @@ public class UIManager : GenericSingletonClass<UIManager>
     [SerializeField] private List<Image> sectors_0_2_5up = new List<Image>();
     [SerializeField] private List<Image> sectors_0_2_5down = new List<Image>();
     [SerializeField] private List<Image> sectors_2_5_5up = new List<Image>();
-    [SerializeField] private List<Image> sectors_2_5_5down = new List<Image>();
+    [SerializeField] private List<Image> sectors_2_5_5down = new List<Image>();    
     [SerializeField] private List<Image> sectors_5_10up = new List<Image>();
     [SerializeField] private List<Image> sectors_5_10down = new List<Image>();
     [SerializeField] private List<Image> sectors_10_15up = new List<Image>();
@@ -35,6 +35,8 @@ public class UIManager : GenericSingletonClass<UIManager>
     [SerializeField] private Image figureObject;
     [SerializeField] private List<Sprite> figures = new List<Sprite>();
 
+    private Dictionary<int, List<Image>> sectorDict = new Dictionary<int, List<Image>>();
+
     private bool allIndicatorsOff;
     private bool redSquareNotInd;
 
@@ -50,6 +52,7 @@ public class UIManager : GenericSingletonClass<UIManager>
         if (nowFigure == figure.redSquare && redSquareNotInd) return;
         figureObject.sprite = figures[(int)nowFigure];
     }
+
 
     public void SetMonitorVerticalSpeed(bool up)
     {
@@ -707,4 +710,5 @@ public enum typeButtonSPSV
     √Œ“,
     TEST,
 }
+
 

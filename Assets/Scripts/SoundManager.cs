@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : GenericSingletonClass<SoundManager>
+public class SoundManager : MonoBehaviour
 {
     private typeTrack typeTrack;
     private float volumeSound = 1f;
