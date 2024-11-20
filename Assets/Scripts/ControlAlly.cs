@@ -6,29 +6,62 @@ using System.Linq;
 
 public class ControlAlly : MonoBehaviour
 {
-    public float expansionSpeed;
-    public float expansionSpeedDelta;
-    public RotateAirCraft rotateAirCraft;
-    public GameObject enemyAirCraft;
-    public RotateAirCraft enemyRotateAirCraft;
-    public RotateArrow rotateArrow;
-    public SoundManager soundManager;
-    public ColorSector colorSector;
-    public MoveAirCraft moveAirCraft;
+    private float expansionSpeed;
+    private float expansionSpeedDelta;
 
-    public figure nowFigure;
-    public float time;
-    public Coroutine timeCoro;
-    public bool notDangerous;
-    public bool targetUp;
-    public bool stopMovementChange;
-    public float distanceAir;
+    private RotateAirCraft rotateAirCraft;
+    private RotateArrow rotateArrow;
+    private SoundManager soundManager;
+    private ColorSector colorSector;
+    private MoveAirCraft moveAirCraft;
+    private RotateAirCraft enemyRotateAirCraft;
 
-    public Animator animator;
-    public Image figureObject;
-    public List<Sprite> figures = new List<Sprite>();
+    private figure nowFigure;
+    private float time;
+    private Coroutine timeCoro;
+    private bool notDangerous;
+    private bool targetUp;
+    private bool stopMovementChange;
+    private float distanceAir;
 
-    public float vertDist;
+    private float vertDist;
+
+    [SerializeField] private float minDistanceClimb_Descent_Now;
+    [SerializeField] private float maxDistanceClimb_Descent_Now;
+    [SerializeField] private float minDistanceClimb_Descent_Crossing;
+    [SerializeField] private float maxDistanceClimb_Descent_Crossing;
+    [SerializeField] private float minDistanceStopControll;
+
+    [SerializeField] private float upSpeedForStopControll;
+    [SerializeField] private float upRotationForStopControll;
+    [SerializeField] private float defaultSpeed;
+    [SerializeField] private float defaultRotation;
+
+    [SerializeField] private float safeDistanceVertical;
+    [SerializeField] private float dangerDistanceVertical;
+
+    [SerializeField] private float dangerExpansionSpeed;
+
+    [SerializeField] private int crossingAngleChange;
+    [SerializeField] private int criticalAngleClimb;
+    [SerializeField] private int criticalAngleDescent;
+
+    [SerializeField] private float timeReactionAlly;
+
+    [SerializeField] private float maxTime_timeEmptyDiamond;
+    [SerializeField] private float timeChangeDiamond;
+    [SerializeField] private float timeChangeCircle;
+    [SerializeField] private float timeChangeSquare;
+
+    [SerializeField] private float minDefaultVertical;
+    [SerializeField] private float maxDefaultVertical;
+
+    [SerializeField] private Animator animator;
+    [SerializeField] private Image figureObject;
+    [SerializeField] private List<Sprite> figures = new List<Sprite>();
+
+    [SerializeField] private GameObject enemyAirCraft;
+    
     private void Start()
     {
         rotateArrow = GetComponent<RotateArrow>();
@@ -46,11 +79,12 @@ public class ControlAlly : MonoBehaviour
     {
         nowFigure = figure.emptyDiamond;
         figureObject.sprite = figures[(int)nowFigure];
-        time = 30f;
+        time = maxTime_timeEmptyDiamond;
         expansionSpeed = 0f;
         stopMovementChange = false;
         notDangerous = false;
-        rotateAirCraft.speedRotation = 3;
+        rotateAirCraft.speedRotation = defaultRotation;
+        moveAirCraft.speed = defaultSpeed;
         if (timeCoro != null) StopCoroutine(timeCoro);
         timeCoro = StartCoroutine(TimeCoroutine());
         animator.SetTrigger("Start");
@@ -63,13 +97,13 @@ public class ControlAlly : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.01f);
-            time -= 0.01f;
-            if (time < 30 && time > 25)
+            yield return new WaitForSeconds(timeReactionAlly);
+            time -= timeReactionAlly;
+            if (maxTime_timeEmptyDiamond < time && time > timeChangeDiamond)
             {
                 nowFigure = figure.emptyDiamond;                
             }
-            if (time <= 25 && time > 20 && nowFigure != figure.whiteDiamond)
+            if (timeChangeDiamond <= time && time > timeChangeCircle && nowFigure != figure.whiteDiamond)
             {
                 nowFigure = figure.whiteDiamond;
                 if (enemyRotateAirCraft.MoveForward)
@@ -109,11 +143,11 @@ public class ControlAlly : MonoBehaviour
                 }
                 
             }
-            if (time <= 20 && time > 15)
+            if (timeChangeCircle <= time && time > timeChangeSquare)
             {
                 nowFigure = figure.yelowCircle;
             }
-            if (time <= 15 && !notDangerous)
+            if (timeChangeSquare <= time && !notDangerous)
             {
                 nowFigure = figure.redSquare;
             }
@@ -127,7 +161,7 @@ public class ControlAlly : MonoBehaviour
             if (enemyAirCraft.transform.position.x > gameObject.transform.position.x)
             {
                 notDangerous = true;
-                if (gameObject.transform.position.y > -1.5f && gameObject.transform.position.y < -0.5f)
+                if (gameObject.transform.position.y > minDefaultVertical && gameObject.transform.position.y < maxDefaultVertical)
                 {
                     SetTargetZero();
                 }
@@ -154,7 +188,7 @@ public class ControlAlly : MonoBehaviour
                 dist.Add(Mathf.Abs(rotateAirCraft.vertPositionB - enemyRotateAirCraft.vertPositionF));
                 dist.Add(Mathf.Abs(rotateAirCraft.vertPositionF - enemyRotateAirCraft.vertPositionF));
                 vertDist = dist.Min();
-                if (vertDist >= 1f && rotateAirCraft.index != 6 && rotateAirCraft.AngleLimit)
+                if (vertDist >= safeDistanceVertical && rotateAirCraft.index != 6 && rotateAirCraft.AngleLimit)
                 {
                     SetTargetZero();
                     soundManager.SoundVertical_Speed();
@@ -166,40 +200,32 @@ public class ControlAlly : MonoBehaviour
                 expansionSpeed = expansionSpeedNow;
 
                 distanceAir = Mathf.Abs(enemyAirCraft.transform.position.x) + Mathf.Abs(gameObject.transform.position.x);
-                if (expansionSpeedDelta >= -0.0003f && rotateAirCraft.AngleLimit && vertDist < 0.9f)
+                if (expansionSpeedDelta >= dangerExpansionSpeed && rotateAirCraft.AngleLimit && vertDist < dangerDistanceVertical)
                 {
                     SetTarget(targetUp);
-                    if (!stopMovementChange && expansionSpeedDelta > -0.005f)
+                    if (!stopMovementChange)
                     {
-                        if (distanceAir > 5.5f && distanceAir < 6.5f)
+                        if (minDistanceClimb_Descent_Now > distanceAir && distanceAir < maxDistanceClimb_Descent_Now)
                         {
                             Climb_Descent_Now();
                             stopMovementChange = true;
-                            rotateAirCraft.speedRotation += 4;
+                            rotateAirCraft.speedRotation += upRotationForStopControll;
                         }
                         else
                         {
-                            if (distanceAir >= 7.5f)
+                            if (minDistanceClimb_Descent_Crossing <= distanceAir && distanceAir < maxDistanceClimb_Descent_Crossing)
                             {
-                                //SetTarget(targetUp);                                
-                                //stopMovementChange = true;
+                                SetTargetCrossing();
+                                rotateAirCraft.speedRotation += upRotationForStopControll;
+                                stopMovementChange = true;
                             }
                             else
                             {
-                                if (distanceAir >= 6.5f && distanceAir < 7.5f)
+                                if (distanceAir <= minDistanceStopControll)
                                 {
-                                    SetTargetCrossing();
-                                    rotateAirCraft.speedRotation += 4;
+                                    moveAirCraft.speed += upSpeedForStopControll;
                                     stopMovementChange = true;
                                 }
-                                else
-                                {
-                                    if (distanceAir <= 4.5f)
-                                    {
-                                        moveAirCraft.speed += 0.1f;
-                                        stopMovementChange = true;
-                                    }
-                                }                                
                             }
                         }
                     }
@@ -220,7 +246,7 @@ public class ControlAlly : MonoBehaviour
         rotateAirCraft.AngleZero();
     }
 
-    public bool SetTarget(bool up)
+    public void SetTarget(bool up)
     {
         bool next;
         if (up)
@@ -242,22 +268,21 @@ public class ControlAlly : MonoBehaviour
                 soundManager.SoundIncrease_Climp();
                 colorSector.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.angleTarget);
             }                    
-        }
-        return next;
+        }        
     }
     public void SetTargetCrossing()
     {
         if (!targetUp)
         {
             targetUp = true;
-            rotateAirCraft.SetAngle(rotateAirCraft.angleTarget + 30);
+            rotateAirCraft.SetAngle(rotateAirCraft.angleTarget + crossingAngleChange);
             soundManager.SoundCrossing_Descent();
             colorSector.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.angleTarget);
         }
         else
         {
             targetUp = false;
-            rotateAirCraft.SetAngle(rotateAirCraft.angleTarget - 30);
+            rotateAirCraft.SetAngle(rotateAirCraft.angleTarget - crossingAngleChange);
             soundManager.SoundCrossing_Climb();
             colorSector.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.angleTarget);
         }
@@ -267,34 +292,18 @@ public class ControlAlly : MonoBehaviour
         if (targetUp)
         {
             targetUp = false;
-            rotateAirCraft.SetAngle(330);
+            rotateAirCraft.SetAngle(criticalAngleClimb);
             soundManager.SoundClimb_Climp_Now();
             colorSector.Climb_ClimbNow();
         }
         else
         {
             targetUp = true;
-            rotateAirCraft.SetAngle(390);
+            rotateAirCraft.SetAngle(criticalAngleDescent);
             soundManager.SoundDescent_Descent_Now();
             colorSector.Descent_DescentNow();
         }
-    }
-    public void Climb_Descent_Crossing()
-    {
-        if (targetUp)
-        {
-            SetTarget(false);
-            soundManager.SoundClimb_Climp_Now();
-            colorSector.Climb_ClimbNow();
-        }
-        else
-        {
-            SetTarget(true);
-            soundManager.SoundDescent_Descent_Now();
-            colorSector.Descent_DescentNow();
-        }
-    }
-
+    } 
 }
 
 public enum figure

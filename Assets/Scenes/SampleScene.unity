@@ -3872,21 +3872,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc733a4766db384891fd2a96103b598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expansionSpeed: 0
-  expansionSpeedDelta: 0
-  rotateAirCraft: {fileID: 1240317385}
-  enemyAirCraft: {fileID: 1043417821}
-  enemyRotateAirCraft: {fileID: 0}
-  rotateArrow: {fileID: 0}
-  soundManager: {fileID: 0}
-  colorSector: {fileID: 0}
-  moveAirCraft: {fileID: 0}
-  nowFigure: 0
-  time: 0
-  notDangerous: 0
-  targetUp: 0
-  stopMovementChange: 0
-  distanceAir: 0
+  minDistanceClimb_Descent_Now: 5.5
+  maxDistanceClimb_Descent_Now: 6.5
+  minDistanceClimb_Descent_Crossing: 6.5
+  maxDistanceClimb_Descent_Crossing: 7.5
+  minDistanceStopControll: 4.5
+  upSpeedForStopControll: 0.1
+  upRotationForStopControll: 4
+  defaultSpeed: 0.2
+  defaultRotation: 3
+  safeDistanceVertical: 1
+  dangerDistanceVertical: 0.9
+  dangerExpansionSpeed: -0.0003
+  crossingAngleChange: 30
+  criticalAngleClimb: 330
+  criticalAngleDescent: 390
+  timeReactionAlly: 0.01
+  maxTime_timeEmptyDiamond: 30
+  timeChangeDiamond: 25
+  timeChangeCircle: 20
+  timeChangeSquare: 15
+  minDefaultVertical: -1.5
+  maxDefaultVertical: -0.5
   animator: {fileID: 585986803}
   figureObject: {fileID: 743474137}
   figures:
@@ -3894,7 +3901,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: eec1bd709a2afc6419315ed233107670, type: 3}
   - {fileID: 21300000, guid: 95b89d55ec7b50442b47ae5e01fe99d1, type: 3}
   - {fileID: 21300000, guid: f940db52b9f11c94eb9df1270708076b, type: 3}
-  vertDist: 0
+  enemyAirCraft: {fileID: 1043417821}
 --- !u!114 &1240317385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3907,7 +3914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb60f9bc87f49624e98cddc820df1b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedRotation: 6
+  speedRotation: 3
   upDown: 1
   targetAngleList:
   - 330
