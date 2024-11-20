@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip increase_descent;
     public AudioClip climb_climp_now;
     public AudioClip descent_descent_now;
+    public AudioClip clear_of_conflict;
 
     public void NewSimulation()
     {
@@ -78,6 +79,10 @@ public class SoundManager : MonoBehaviour
     public void SoundDescent_Descent_Now()
     {
         if (typeTrack != typeTrack.descent_descent_now) MakeSoundCicle(descent_descent_now);
+    }
+    public void SoundClear_Of_Conflict()
+    {
+        if (typeTrack != typeTrack.clear_of_conflict) MakeSoundCicle(clear_of_conflict);
     }
 }
 

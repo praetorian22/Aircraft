@@ -30,17 +30,17 @@ public class ColorSector : MonoBehaviour
         {
             SetSector025upEmty();
             SetSector255upEmty();
+            SetSector510upEmty();
             SetSector1015upEmty();
             SetSector1520upEmty();
-            SetSector025upEmty();
             SetSector2025upEmty();
             SetSector2530upEmty();
 
             SetSector025downRed();
             SetSector255downRed();
+            SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector025downRed();
+            SetSector1520downRed();            
             SetSector2025downRed();
             SetSector2530downRed();
         }
@@ -48,25 +48,26 @@ public class ColorSector : MonoBehaviour
         {
             SetSector025downEmty();
             SetSector255downEmty();
+            SetSector510downEmty();
             SetSector1015downEmty();
-            SetSector1520downEmty();
-            SetSector025downEmty();
+            SetSector1520downEmty();            
             SetSector2025downEmty();
             SetSector2530downEmty();
 
             SetSector025upRed();
             SetSector255upRed();
+            SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector025upRed();
+            SetSector1520upRed();            
             SetSector2025upRed();
             SetSector2530upRed();
         }
     }
-    public void TraficTrafic()
+    public void TraficTrafic_ClearOfConflict()
     {
         SetSector025upEmty();
         SetSector255upEmty();
+        SetSector510upEmty();
         SetSector1015upEmty();
         SetSector1520upEmty();
         SetSector025upEmty();
@@ -74,6 +75,7 @@ public class ColorSector : MonoBehaviour
         SetSector2530upEmty();
         SetSector025downEmty();
         SetSector255downEmty();
+        SetSector510downEmty();
         SetSector1015downEmty();
         SetSector1520downEmty();
         SetSector025downEmty();
@@ -81,9 +83,27 @@ public class ColorSector : MonoBehaviour
         SetSector2530downEmty();
     }
 
-    public void ClimbClimb_IncreaseClimb(float angle)
+    public void ClimbClimb_IncreaseClimb_CrossingClimb(float angle)
     {
         if (angle == 355)
+        {
+            SetSector025upRed();
+            SetSector255upGreen();
+            SetSector510upEmty();
+            SetSector1015upEmty();
+            SetSector1520upEmty();
+            SetSector2025upEmty();
+            SetSector2530upEmty();
+            
+            SetSector025downRed();
+            SetSector255downRed();
+            SetSector510downRed();
+            SetSector1015downRed();
+            SetSector1520downRed();            
+            SetSector2025downRed();
+            SetSector2530downRed();
+        }
+        if (angle == 350)
         {
             SetSector025upRed();
             SetSector255upRed();
@@ -92,16 +112,16 @@ public class ColorSector : MonoBehaviour
             SetSector1520upEmty();
             SetSector2025upEmty();
             SetSector2530upEmty();
-            
+
             SetSector025downRed();
             SetSector255downRed();
+            SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector025downRed();
+            SetSector1520downRed();            
             SetSector2025downRed();
             SetSector2530downRed();
         }
-        if (angle == 350)
+        if (angle == 345)
         {
             SetSector025upRed();
             SetSector255upRed();
@@ -113,13 +133,13 @@ public class ColorSector : MonoBehaviour
 
             SetSector025downRed();
             SetSector255downRed();
+            SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector025downRed();
+            SetSector1520downRed();            
             SetSector2025downRed();
             SetSector2530downRed();
         }
-        if (angle == 345)
+        if (angle == 340)
         {
             SetSector025upRed();
             SetSector255upRed();
@@ -131,13 +151,13 @@ public class ColorSector : MonoBehaviour
 
             SetSector025downRed();
             SetSector255downRed();
+            SetSector510downRed();
             SetSector1015downRed();
             SetSector1520downRed();
-            SetSector025downRed();
             SetSector2025downRed();
             SetSector2530downRed();
         }
-        if (angle == 340)
+        if (angle == 335)
         {
             SetSector025upRed();
             SetSector255upRed();
@@ -149,13 +169,13 @@ public class ColorSector : MonoBehaviour
 
             SetSector025downRed();
             SetSector255downRed();
+            SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector025downRed();
+            SetSector1520downRed();            
             SetSector2025downRed();
             SetSector2530downRed();
         }
-        if (angle == 335)
+        if (angle == 330)
         {
             SetSector025upRed();
             SetSector255upRed();
@@ -167,16 +187,34 @@ public class ColorSector : MonoBehaviour
 
             SetSector025downRed();
             SetSector255downRed();
+            SetSector510downRed();
             SetSector1015downRed();
             SetSector1520downRed();
-            SetSector025downRed();
             SetSector2025downRed();
             SetSector2530downRed();
         }
     }
-    public void DescentDescent_IncreaseDescent(float angle)
+    public void DescentDescent_IncreaseDescent_CrossingDescent(float angle)
     {
         if (angle == 365)
+        {
+            SetSector025downRed();
+            SetSector255downGreen();
+            SetSector510downEmty();
+            SetSector1015downEmty();
+            SetSector1520downEmty();
+            SetSector2025downEmty();
+            SetSector2530downEmty();
+
+            SetSector025upRed();
+            SetSector255upRed();
+            SetSector510upRed();
+            SetSector1015upRed();
+            SetSector1520upRed();            
+            SetSector2025upRed();
+            SetSector2530upRed();
+        }
+        if (angle == 370)
         {
             SetSector025downRed();
             SetSector255downRed();
@@ -190,12 +228,11 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector025upRed();
+            SetSector1520upRed();            
             SetSector2025upRed();
             SetSector2530upRed();
         }
-        if (angle == 370)
+        if (angle == 375)
         {
             SetSector025downRed();
             SetSector255downRed();
@@ -209,12 +246,11 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector025upRed();
+            SetSector1520upRed();            
             SetSector2025upRed();
             SetSector2530upRed();
         }
-        if (angle == 375)
+        if (angle == 380)
         {
             SetSector025downRed();
             SetSector255downRed();
@@ -228,12 +264,11 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector025upRed();
+            SetSector1520upRed();            
             SetSector2025upRed();
             SetSector2530upRed();
         }
-        if (angle == 380)
+        if (angle == 385)
         {
             SetSector025downRed();
             SetSector255downRed();
@@ -247,12 +282,11 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector025upRed();
+            SetSector1520upRed();            
             SetSector2025upRed();
             SetSector2530upRed();
         }
-        if (angle == 385)
+        if (angle == 390)
         {
             SetSector025downRed();
             SetSector255downRed();
@@ -267,7 +301,6 @@ public class ColorSector : MonoBehaviour
             SetSector510upRed();
             SetSector1015upRed();
             SetSector1520upRed();
-            SetSector025upRed();
             SetSector2025upRed();
             SetSector2530upRed();
         }
@@ -285,9 +318,9 @@ public class ColorSector : MonoBehaviour
 
         SetSector025downRed();
         SetSector255downRed();
+        SetSector510downRed();
         SetSector1015downRed();
-        SetSector1520downRed();
-        SetSector025downRed();
+        SetSector1520downRed();        
         SetSector2025downRed();
         SetSector2530downRed();        
     }
@@ -303,9 +336,9 @@ public class ColorSector : MonoBehaviour
 
         SetSector025upRed();
         SetSector255upRed();
+        SetSector510downRed();
         SetSector1015upRed();
-        SetSector1520upRed();
-        SetSector025upRed();
+        SetSector1520upRed();        
         SetSector2025upRed();
         SetSector2530upRed();
     }

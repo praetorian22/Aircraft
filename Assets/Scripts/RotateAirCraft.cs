@@ -53,7 +53,11 @@ public class RotateAirCraft : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));        
         changeAngleEvent?.Invoke(angleNow);
     } 
-
+    public void SetAngle(float val = 360)
+    {
+        angleTarget = val;
+        index = targetAngleList.IndexOf(angleTarget);
+    }
     public bool NextAngle(int val = 1)
     {
         if (index == 12) return false;
