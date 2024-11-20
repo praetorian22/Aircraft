@@ -3,29 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ColorSector : MonoBehaviour
+public class UIManager : GenericSingletonClass<UIManager>
 {
-    public Color32 colorRed;
-    public Color32 colorGreen;
-    public Color32 colorEmpty;
+    [SerializeField] Button controllUpButton;
+    [SerializeField] Button controllDownButton;
 
-    public List<Image> sectors_0_2_5up = new List<Image>();
-    public List<Image> sectors_0_2_5down = new List<Image>();
-    public List<Image> sectors_2_5_5up = new List<Image>();
-    public List<Image> sectors_2_5_5down = new List<Image>();
-    public List<Image> sectors_5_10up = new List<Image>();
-    public List<Image> sectors_5_10down = new List<Image>();
-    public List<Image> sectors_10_15up = new List<Image>();
-    public List<Image> sectors_10_15down = new List<Image>();
-    public List<Image> sectors_15_20up = new List<Image>();
-    public List<Image> sectors_15_20down = new List<Image>();
-    public List<Image> sectors_20_25up = new List<Image>();
-    public List<Image> sectors_20_25down = new List<Image>();
-    public List<Image> sectors_25_30up = new List<Image>();
-    public List<Image> sectors_25_30down = new List<Image>();
+    [SerializeField] private Color32 colorRed;
+    [SerializeField] private Color32 colorGreen;
+    [SerializeField] private Color32 colorEmpty;
+
+    [SerializeField] private List<Image> sectors_0_2_5up = new List<Image>();
+    [SerializeField] private List<Image> sectors_0_2_5down = new List<Image>();
+    [SerializeField] private List<Image> sectors_2_5_5up = new List<Image>();
+    [SerializeField] private List<Image> sectors_2_5_5down = new List<Image>();
+    [SerializeField] private List<Image> sectors_5_10up = new List<Image>();
+    [SerializeField] private List<Image> sectors_5_10down = new List<Image>();
+    [SerializeField] private List<Image> sectors_10_15up = new List<Image>();
+    [SerializeField] private List<Image> sectors_10_15down = new List<Image>();
+    [SerializeField] private List<Image> sectors_15_20up = new List<Image>();
+    [SerializeField] private List<Image> sectors_15_20down = new List<Image>();
+    [SerializeField] private List<Image> sectors_20_25up = new List<Image>();
+    [SerializeField] private List<Image> sectors_20_25down = new List<Image>();
+    [SerializeField] private List<Image> sectors_25_30up = new List<Image>();
+    [SerializeField] private List<Image> sectors_25_30down = new List<Image>();
+
+    [SerializeField] private GameObject arrow;
+    [SerializeField] private float angleNow;
+
+    [SerializeField] private List<Button> SPSVButtons;    
+
+    [SerializeField] private Image figureObject;
+    [SerializeField] private List<Sprite> figures = new List<Sprite>();
+
+    private bool allIndicatorsOff;
+    private bool redSquareNotInd;
+
+    public void NewSimulation()
+    {
+        TraficTrafic_ClearOfConflict();
+        angleNow = 360;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+    }
+
+    public void ChangeFigura(figure nowFigure)
+    {
+        if (nowFigure == figure.redSquare && redSquareNotInd) return;
+        figureObject.sprite = figures[(int)nowFigure];
+    }
 
     public void SetMonitorVerticalSpeed(bool up)
     {
+        if (allIndicatorsOff) return;
         if (up)
         {
             SetSector025upEmty();
@@ -40,7 +68,7 @@ public class ColorSector : MonoBehaviour
             SetSector255downRed();
             SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();            
+            SetSector1520downRed();
             SetSector2025downRed();
             SetSector2530downRed();
         }
@@ -50,7 +78,7 @@ public class ColorSector : MonoBehaviour
             SetSector255downEmty();
             SetSector510downEmty();
             SetSector1015downEmty();
-            SetSector1520downEmty();            
+            SetSector1520downEmty();
             SetSector2025downEmty();
             SetSector2530downEmty();
 
@@ -58,13 +86,14 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();            
+            SetSector1520upRed();
             SetSector2025upRed();
             SetSector2530upRed();
         }
     }
     public void TraficTrafic_ClearOfConflict()
     {
+        if (allIndicatorsOff) return;
         SetSector025upEmty();
         SetSector255upEmty();
         SetSector510upEmty();
@@ -85,6 +114,7 @@ public class ColorSector : MonoBehaviour
 
     public void ClimbClimb_IncreaseClimb_CrossingClimb(float angle)
     {
+        if (allIndicatorsOff) return;
         if (angle == 355)
         {
             SetSector025upRed();
@@ -94,12 +124,12 @@ public class ColorSector : MonoBehaviour
             SetSector1520upEmty();
             SetSector2025upEmty();
             SetSector2530upEmty();
-            
+
             SetSector025downRed();
             SetSector255downRed();
             SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();            
+            SetSector1520downRed();
             SetSector2025downRed();
             SetSector2530downRed();
         }
@@ -117,7 +147,7 @@ public class ColorSector : MonoBehaviour
             SetSector255downRed();
             SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();            
+            SetSector1520downRed();
             SetSector2025downRed();
             SetSector2530downRed();
         }
@@ -135,7 +165,7 @@ public class ColorSector : MonoBehaviour
             SetSector255downRed();
             SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();            
+            SetSector1520downRed();
             SetSector2025downRed();
             SetSector2530downRed();
         }
@@ -171,7 +201,7 @@ public class ColorSector : MonoBehaviour
             SetSector255downRed();
             SetSector510downRed();
             SetSector1015downRed();
-            SetSector1520downRed();            
+            SetSector1520downRed();
             SetSector2025downRed();
             SetSector2530downRed();
         }
@@ -196,6 +226,7 @@ public class ColorSector : MonoBehaviour
     }
     public void DescentDescent_IncreaseDescent_CrossingDescent(float angle)
     {
+        if (allIndicatorsOff) return;
         if (angle == 365)
         {
             SetSector025downRed();
@@ -210,7 +241,7 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();            
+            SetSector1520upRed();
             SetSector2025upRed();
             SetSector2530upRed();
         }
@@ -228,7 +259,7 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();            
+            SetSector1520upRed();
             SetSector2025upRed();
             SetSector2530upRed();
         }
@@ -246,7 +277,7 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();            
+            SetSector1520upRed();
             SetSector2025upRed();
             SetSector2530upRed();
         }
@@ -264,7 +295,7 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();            
+            SetSector1520upRed();
             SetSector2025upRed();
             SetSector2530upRed();
         }
@@ -282,7 +313,7 @@ public class ColorSector : MonoBehaviour
             SetSector255upRed();
             SetSector510upRed();
             SetSector1015upRed();
-            SetSector1520upRed();            
+            SetSector1520upRed();
             SetSector2025upRed();
             SetSector2530upRed();
         }
@@ -307,7 +338,8 @@ public class ColorSector : MonoBehaviour
     }
 
     public void Climb_ClimbNow()
-    {        
+    {
+        if (allIndicatorsOff) return;
         SetSector025upRed();
         SetSector255upRed();
         SetSector510upRed();
@@ -320,12 +352,13 @@ public class ColorSector : MonoBehaviour
         SetSector255downRed();
         SetSector510downRed();
         SetSector1015downRed();
-        SetSector1520downRed();        
+        SetSector1520downRed();
         SetSector2025downRed();
-        SetSector2530downRed();        
+        SetSector2530downRed();
     }
     public void Descent_DescentNow()
     {
+        if (allIndicatorsOff) return;
         SetSector025downRed();
         SetSector255downRed();
         SetSector510downRed();
@@ -338,7 +371,7 @@ public class ColorSector : MonoBehaviour
         SetSector255upRed();
         SetSector510downRed();
         SetSector1015upRed();
-        SetSector1520upRed();        
+        SetSector1520upRed();
         SetSector2025upRed();
         SetSector2530upRed();
     }
@@ -525,4 +558,153 @@ public class ColorSector : MonoBehaviour
     {
         SetSectorsColor(sectors_25_30down, colorEmpty);
     }
+
+    private void Update()
+    {
+        arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+    }
+
+    public void TranslateAngleArrow(float angle)
+    {
+        if (angle < 360f && angle >= 355f)
+        {
+            angleNow = 360 - (360 - angle) * 12;
+        }
+        else
+        {
+            if (angle < 355f && angle >= 350f)
+            {
+                angleNow = 300 - (355 - angle) * 8;
+            }
+            else
+            {
+                if (angle < 350f && angle >= 345f)
+                {
+                    angleNow = 260 - (350 - angle) * 6;
+                }
+                else
+                {
+                    if (angle < 345f && angle >= 330f)
+                    {
+                        angleNow = 230 - (345 - angle) * 3;
+                    }
+                    else
+                    {
+                        if (angle > 360f && angle <= 365f)
+                        {
+                            angleNow = 360 + (angle - 360) * 12;
+                        }
+                        else
+                        {
+                            if (angle > 365f && angle <= 370f)
+                            {
+                                angleNow = 420 + (angle - 365) * 8;
+                            }
+                            else
+                            {
+                                if (angle > 370f && angle <= 375f)
+                                {
+                                    angleNow = 460 + (angle - 370) * 6;
+                                }
+                                else
+                                {
+                                    if (angle > 375f && angle <= 390f)
+                                    {
+                                        angleNow = 490 + (angle - 375) * 3;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void AllIndicatorsOff()
+    {
+        allIndicatorsOff = true;
+        SetSector025upEmty();
+        SetSector255upEmty();
+        SetSector510upEmty();
+        SetSector1015upEmty();
+        SetSector1520upEmty();
+        SetSector025upEmty();
+        SetSector2025upEmty();
+        SetSector2530upEmty();
+        SetSector025downEmty();
+        SetSector255downEmty();
+        SetSector510downEmty();
+        SetSector1015downEmty();
+        SetSector1520downEmty();
+        SetSector025downEmty();
+        SetSector2025downEmty();
+        SetSector2530downEmty();
+
+    }
+    public void AllIndicatorsOn()
+    {
+        allIndicatorsOff = false;
+    }
+    public void FiguraOff()
+    {
+        figureObject.gameObject.SetActive(false);
+    }
+    public void FiguraOn()
+    {
+        figureObject.gameObject.SetActive(true);
+    }
+    public void RedSquareOff()
+    {
+        redSquareNotInd = true;
+    }
+    public void RedSquareOn()
+    {
+        redSquareNotInd = false;
+    }
+    public void SPSVButtonPressed(typeButtonSPSV typeButtonSPSV)
+    {
+        
+        foreach (Button button in SPSVButtons)
+        {
+            if (typeButtonSPSV == button.GetComponent<ButtonSPSV>().TypeButtonSPSV)
+            {
+                button.gameObject.GetComponent<Image>().color = Color.green;
+            }
+            else
+            {
+                button.gameObject.GetComponent<Image>().color = Color.white;
+            }
+        }
+    }
+    public void SPSVTestButtonOn()
+    {
+        foreach (Button button in SPSVButtons)
+        {
+            if (button.GetComponent<ButtonSPSV>().TypeButtonSPSV == typeButtonSPSV.TEST)
+            {
+                button.gameObject.GetComponent<Image>().color = Color.green;
+            }
+        }
+    }
+    public void SPSVTestButtonOff()
+    {
+        foreach (Button button in SPSVButtons)
+        {
+            if (button.GetComponent<ButtonSPSV>().TypeButtonSPSV == typeButtonSPSV.TEST)
+            {
+                button.gameObject.GetComponent<Image>().color = Color.white;
+            }
+        }
+    }
 }
+
+public enum typeButtonSPSV
+{
+    T_RA,
+    TA,
+    √Œ“,
+    TEST,
+}
+

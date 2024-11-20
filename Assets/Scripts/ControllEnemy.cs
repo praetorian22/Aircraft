@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class ControllEnemy : MonoBehaviour
 {
-    public RotateAirCraft rotateAirCraft;
+    private RotateAirCraft rotateAirCraft;
+    private MoveAirCraft moveAirCraft;
+    [SerializeField] private float defaultRotation;
+    [SerializeField] private float defaultSpeed;
 
-    private void Start()
+
+    private void Awake()
     {
         rotateAirCraft = GetComponent<RotateAirCraft>();
+        moveAirCraft = GetComponent<MoveAirCraft>();
+    }
+
+    public void NewSimulation()
+    {
+        rotateAirCraft.NewSimulation(defaultRotation);
+        moveAirCraft.NewSimulation(defaultSpeed);
     }
 
     public void PressUp()
     {
-        if (rotateAirCraft.index < 12)
-        {
-            rotateAirCraft.index += 1;
-            rotateAirCraft.angleTarget = rotateAirCraft.targetAngleList[rotateAirCraft.index];
-        }
+        rotateAirCraft.NextAngle();
     }
     public void PressDown()
     {
-        if (rotateAirCraft.index > 0)
-        {
-            rotateAirCraft.index -= 1;
-            rotateAirCraft.angleTarget = rotateAirCraft.targetAngleList[rotateAirCraft.index];
-        }
+        rotateAirCraft.PrewAngle();
     }
 }

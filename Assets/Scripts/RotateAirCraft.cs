@@ -5,13 +5,16 @@ using System;
 
 public class RotateAirCraft : MonoBehaviour
 {
-    public float speedRotation;
-    public int upDown;
-    public List<float> targetAngleList;
-    public float angleNow;
-    public float angleTarget;
-    public int index;
+    private float speedRotation;
+    [SerializeField] private GameObject backPoint;
+    [SerializeField] private GameObject forwardPoint;
 
+    [SerializeField] private int upDown;
+    [SerializeField] private List<float> targetAngleList;
+    [SerializeField] private float angleNow;
+    [SerializeField] private float angleTarget;
+    [SerializeField] private int index;
+    
     public bool MoveUp => angleNow > 360;
     public bool MoveDown => angleNow < 360;
     public bool MoveForward => angleNow == 360;
@@ -19,9 +22,9 @@ public class RotateAirCraft : MonoBehaviour
     public bool AngleLimit => angleNow == angleTarget;
 
     public Action<float> changeAngleEvent;
+    public float AngleTaret => angleTarget;
 
-    public GameObject backPoint;
-    public GameObject forwardPoint;
+    public bool Horizont => index == 6;
 
     public float vertPositionB => backPoint.transform.position.y;
     public float vertPositionF => forwardPoint.transform.position.y;
@@ -32,12 +35,13 @@ public class RotateAirCraft : MonoBehaviour
         angleTarget = targetAngleList[6];
     }
 
-    public void NewSimulation()
+    public void NewSimulation(float speedRotation)
     {
         angleNow = targetAngleList[6];
         angleTarget = targetAngleList[6];
         index = 6;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+        this.speedRotation = speedRotation;
     }
 
     private void Update()
@@ -123,5 +127,10 @@ public class RotateAirCraft : MonoBehaviour
     {
         index = 6;
         angleTarget = targetAngleList[index];
+    }
+
+    public void UpSpeedRotation(float val)
+    {
+        speedRotation += val;
     }
 }

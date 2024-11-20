@@ -2,40 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : GenericSingletonClass<SoundManager>
 {
-    public AudioSource audioSource;
-    public float volumeMusic = 1f;
-    public typeTrack typeTrack;
+    private typeTrack typeTrack;
+    private float volumeSound = 1f;
 
-    public AudioClip traffic_traffic;
-    public AudioClip vertical_speed;
-    public AudioClip climb_climb;
-    public AudioClip descent_descent;
-    public AudioClip crossing_climb;
-    public AudioClip crossing_descent;
-    public AudioClip increase_climb;
-    public AudioClip increase_descent;
-    public AudioClip climb_climp_now;
-    public AudioClip descent_descent_now;
-    public AudioClip clear_of_conflict;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip traffic_traffic;
+    [SerializeField] private AudioClip vertical_speed;
+    [SerializeField] private AudioClip climb_climb;
+    [SerializeField] private AudioClip descent_descent;
+    [SerializeField] private AudioClip crossing_climb;
+    [SerializeField] private AudioClip crossing_descent;
+    [SerializeField] private AudioClip increase_climb;
+    [SerializeField] private AudioClip increase_descent;
+    [SerializeField] private AudioClip climb_climp_now;
+    [SerializeField] private AudioClip descent_descent_now;
+    [SerializeField] private AudioClip clear_of_conflict;
+
+    private bool taSPSV;
 
     public void NewSimulation()
     {
         typeTrack = typeTrack.none;
+        SoundTraffic_Traffic();
     }
 
     private void MakeSound(AudioClip original, Vector3 position)
     {
-        AudioSource.PlayClipAtPoint(original, position, volumeMusic);
+        AudioSource.PlayClipAtPoint(original, position, volumeSound);
     }
     private void MakeSoundCicle(AudioClip original)
     {
-        audioSource.volume = volumeMusic;
+        if (taSPSV && original != traffic_traffic) return;
+        audioSource.volume = volumeSound;
         audioSource.clip = original;
         audioSource.Play();
     }
-    public void StopMusic()
+    public void StopSound()
     {
         audioSource.Stop();
     }
@@ -83,6 +87,27 @@ public class SoundManager : MonoBehaviour
     public void SoundClear_Of_Conflict()
     {
         if (typeTrack != typeTrack.clear_of_conflict) MakeSoundCicle(clear_of_conflict);
+    }
+
+    public void SoundOff()
+    {
+        volumeSound = 0f;
+        StopSound();
+    }
+
+    public void SoundOn()
+    {
+        volumeSound = 1f;
+        StopSound();
+    }
+
+    public void TaSPSVOn()
+    {
+        taSPSV = true;
+    }
+    public void TaSPSVOff()
+    {
+        taSPSV = false;
     }
 }
 
