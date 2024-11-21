@@ -38,6 +38,14 @@ public class ControllSimulation : MonoBehaviour
         ResetSimulation();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey("escape"))  
+        {
+            Application.Quit();    
+        }
+    }
+
     public void ResetSimulation()
     {
         airEnemy.SetActive(true);
