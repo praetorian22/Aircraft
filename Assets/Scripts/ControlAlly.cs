@@ -57,6 +57,7 @@ public class ControlAlly : MonoBehaviour
     [SerializeField] private GameObject enemyAirCraft;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private SoundManager soundManager;
+    [SerializeField] private Explosion explosion;
 
     private void Awake()
     {
@@ -64,9 +65,7 @@ public class ControlAlly : MonoBehaviour
         rotateAirCraft = GetComponent<RotateAirCraft>();
         rotateAirCraft.changeAngleEvent += uiManager.TranslateAngleArrow;
         enemyRotateAirCraft = enemyAirCraft.GetComponent<RotateAirCraft>();               
-    }
-
-    
+    }    
 
     public void NewSimulation()
     {
@@ -292,7 +291,11 @@ public class ControlAlly : MonoBehaviour
             soundManager.SoundDescent_Descent_Now();
             uiManager.Descent_DescentNow();
         }
-    } 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        explosion.ExplosionCall();
+    }
 }
 
 public enum figure
