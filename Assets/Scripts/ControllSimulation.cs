@@ -9,8 +9,7 @@ public class ControllSimulation : MonoBehaviour
     [SerializeField] private GameObject pointAirAlly;
     [SerializeField] private GameObject airEnemy;
     [SerializeField] private GameObject airAlly;
-
-    private Coroutine testPressCoro;
+    
     private UIManager uIManager;
     private SoundManager soundManager;
     public void PressPause()
@@ -75,7 +74,7 @@ public class ControllSimulation : MonoBehaviour
                 {
                     T_RAPress();
                     break;
-                }
+                }            
         }
     }
 
@@ -101,4 +100,5 @@ public class ControllSimulation : MonoBehaviour
         soundManager.SoundOn();
         soundManager.TaSPSVOff();
     }    
+    
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     private typeTrack typeTrack;
-    private float volumeSound = 1f;
+    private float volumeSound = 0.8f;
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip traffic_traffic;
@@ -96,7 +96,7 @@ public class SoundManager : MonoBehaviour
 
     public void SoundOn()
     {
-        volumeSound = 1f;
+        volumeSound = 0.8f;
         StopSound();
     }
 

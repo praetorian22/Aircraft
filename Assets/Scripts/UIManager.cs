@@ -34,17 +34,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image figureObject;
     [SerializeField] private List<Sprite> figures = new List<Sprite>();
     [SerializeField] private Sprite redSquare;
-    [SerializeField] private Sprite emptySquare;
-    [SerializeField] private Button SPSVOptionButton;
+    [SerializeField] private Sprite emptySquare;    
+    [SerializeField] private Image SPSVOptionImage;
     [SerializeField] private List<Sprite> SPSVButtonImage = new List<Sprite>();
+    [SerializeField] private GameObject SPSVButtonTestImage;
+
+    [SerializeField] private GameObject variometrIndicationOff;
     private Dictionary<typeButtonSPSV, Sprite> SPSVButtonImageDict = new Dictionary<typeButtonSPSV, Sprite>();
 
     private Dictionary<int, List<Image>> sectorDict = new Dictionary<int, List<Image>>();
 
-    private bool allIndicatorsOff;    
     private figure nowFigure;
 
     private typeButtonSPSV sPSVNow;
+    private Coroutine testPressCoro;
 
     public Action<typeButtonSPSV> changeTypeSPVSEvent;
     private void Awake()
@@ -56,9 +59,10 @@ public class UIManager : MonoBehaviour
 
     public void NewSimulation()
     {
-        sPSVNow = typeButtonSPSV.T_RA;
-        SPSVButtonPressed();        
+        SPSVButtonPressed((int)typeButtonSPSV.√Œ“);        
         TraficTrafic_ClearOfConflict();
+        if (testPressCoro != null) StopCoroutine(testPressCoro);
+        SPSVButtonTestImage.SetActive(false);
         angleNow = 360;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
     }
@@ -72,7 +76,6 @@ public class UIManager : MonoBehaviour
 
     public void SetMonitorVerticalSpeed(bool up)
     {
-        if (allIndicatorsOff) return;
         if (up)
         {
             SetSector025upEmty();
@@ -111,8 +114,7 @@ public class UIManager : MonoBehaviour
         }
     }
     public void TraficTrafic_ClearOfConflict()
-    {
-        if (allIndicatorsOff) return;
+    {        
         SetSector025upEmty();
         SetSector255upEmty();
         SetSector510upEmty();
@@ -133,7 +135,6 @@ public class UIManager : MonoBehaviour
 
     public void ClimbClimb_IncreaseClimb_CrossingClimb(float angle)
     {
-        if (allIndicatorsOff) return;
         if (angle == 355)
         {
             SetSector025upRed();
@@ -245,7 +246,6 @@ public class UIManager : MonoBehaviour
     }
     public void DescentDescent_IncreaseDescent_CrossingDescent(float angle)
     {
-        if (allIndicatorsOff) return;
         if (angle == 365)
         {
             SetSector025downRed();
@@ -358,7 +358,6 @@ public class UIManager : MonoBehaviour
 
     public void Climb_ClimbNow()
     {
-        if (allIndicatorsOff) return;
         SetSector025upRed();
         SetSector255upRed();
         SetSector510upRed();
@@ -377,7 +376,6 @@ public class UIManager : MonoBehaviour
     }
     public void Descent_DescentNow()
     {
-        if (allIndicatorsOff) return;
         SetSector025downRed();
         SetSector255downRed();
         SetSector510downRed();
@@ -643,28 +641,11 @@ public class UIManager : MonoBehaviour
 
     public void AllIndicatorsOff()
     {
-        allIndicatorsOff = true;
-        SetSector025upEmty();
-        SetSector255upEmty();
-        SetSector510upEmty();
-        SetSector1015upEmty();
-        SetSector1520upEmty();
-        SetSector025upEmty();
-        SetSector2025upEmty();
-        SetSector2530upEmty();
-        SetSector025downEmty();
-        SetSector255downEmty();
-        SetSector510downEmty();
-        SetSector1015downEmty();
-        SetSector1520downEmty();
-        SetSector025downEmty();
-        SetSector2025downEmty();
-        SetSector2530downEmty();
-
+        variometrIndicationOff.SetActive(true);  
     }
     public void AllIndicatorsOn()
     {
-        allIndicatorsOff = false;
+        variometrIndicationOff.SetActive(false);
     }
     public void FiguraOff()
     {
@@ -684,33 +665,32 @@ public class UIManager : MonoBehaviour
         figures[(int)figure.redSquare] = redSquare;
         ChangeFigura(nowFigure);
     }
-    public void SPSVButtonPressed()
+    public void SPSVButtonPressed(int typeButtonSPSV)
     {
-        NextTypeSPSV();
-        SPSVOptionButton.gameObject.GetComponent<Image>().sprite = SPSVButtonImageDict[sPSVNow];
-        changeTypeSPVSEvent?.Invoke(sPSVNow);
-    }
-    private void NextTypeSPSV()
-    {
-        if (sPSVNow == typeButtonSPSV.√Œ“)
+        sPSVNow = (typeButtonSPSV)typeButtonSPSV;
+        if ((int)sPSVNow < 3)
         {
-            sPSVNow = typeButtonSPSV.TA;
+            SPSVOptionImage.GetComponent<Image>().sprite = SPSVButtonImageDict[sPSVNow];
+            changeTypeSPVSEvent?.Invoke(sPSVNow);
         }
         else
         {
-            if (sPSVNow == typeButtonSPSV.TA)
-            {
-                sPSVNow = typeButtonSPSV.T_RA;
-            }
-            else
-            {
-                if (sPSVNow == typeButtonSPSV.T_RA)
-                {
-                    sPSVNow = typeButtonSPSV.√Œ“;
-                }
-            }
+            TestPress();
         }
-    }    
+    }
+    private void TestPress()
+    {
+        if (testPressCoro != null) StopCoroutine(testPressCoro);
+        testPressCoro = StartCoroutine(TestPressCoro());
+    }
+
+    private IEnumerator TestPressCoro()
+    {
+        yield return new WaitForSeconds(5f);
+        SPSVButtonTestImage.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        SPSVButtonTestImage.SetActive(false);
+    }
 }
 
 public enum typeButtonSPSV
