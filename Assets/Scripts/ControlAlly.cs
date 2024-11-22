@@ -95,10 +95,18 @@ public class ControlAlly : MonoBehaviour
                 nowFigure = figure.emptyDiamond;
                 uiManager.ChangeFigura(nowFigure);
             }
-            if (timeChangeDiamond >= time && time > timeChangeCircle && nowFigure != figure.whiteDiamond)
+            if (timeChangeDiamond >= time && time > timeChangeCircle)
             {
                 nowFigure = figure.whiteDiamond;
+                uiManager.ChangeFigura(nowFigure);                
+                
+            }
+            if (timeChangeCircle >= time && time > timeChangeSquare && nowFigure != figure.yelowCircle)
+            {
+                nowFigure = figure.yelowCircle;
+                soundManager.SoundTraffic_Traffic();
                 uiManager.ChangeFigura(nowFigure);
+                yield return new WaitForSeconds(3f);
                 if (enemyRotateAirCraft.MoveForward)
                 {
                     int random = Random.Range(0, 2);
@@ -107,14 +115,14 @@ public class ControlAlly : MonoBehaviour
                         SetTarget(true);
                         soundManager.SoundDescent_Descent();
                         uiManager.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.AngleTaret);
-                    }                       
+                    }
                     else
                     {
                         SetTarget(false);
                         soundManager.SoundClimb_Climb();
                         uiManager.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.AngleTaret);
-                    }                        
-                    
+                    }
+
                 }
                 else
                 {
@@ -134,13 +142,8 @@ public class ControlAlly : MonoBehaviour
                         }
                     }
                 }
-                
-            }
-            if (timeChangeCircle >= time && time > timeChangeSquare)
-            {
-                nowFigure = figure.yelowCircle;
-                uiManager.ChangeFigura(nowFigure);
-            }
+            }            
+
             if (timeChangeSquare >= time && !notDangerous)
             {
                 nowFigure = figure.redSquare;
@@ -174,7 +177,7 @@ public class ControlAlly : MonoBehaviour
                 }                
             }
 
-            if ((int)nowFigure > 0)
+            if ((int)nowFigure > 1 && time < timeChangeCircle - 2f)
             { 
                 List<float> dist = new List<float>();
                 dist.Add(Mathf.Abs(rotateAirCraft.vertPositionB - enemyRotateAirCraft.vertPositionB));

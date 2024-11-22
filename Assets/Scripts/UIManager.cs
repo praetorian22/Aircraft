@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -30,18 +31,33 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject arrow;
     [SerializeField] private float angleNow;
 
-    [SerializeField] private List<Button> SPSVButtons;    
-
     [SerializeField] private Image figureObject;
     [SerializeField] private List<Sprite> figures = new List<Sprite>();
+    [SerializeField] private Sprite redSquare;
+    [SerializeField] private Sprite emptySquare;
+    [SerializeField] private Button SPSVOptionButton;
+    [SerializeField] private List<Sprite> SPSVButtonImage = new List<Sprite>();
+    private Dictionary<typeButtonSPSV, Sprite> SPSVButtonImageDict = new Dictionary<typeButtonSPSV, Sprite>();
 
     private Dictionary<int, List<Image>> sectorDict = new Dictionary<int, List<Image>>();
 
-    private bool allIndicatorsOff;
-    private bool redSquareNotInd;
+    private bool allIndicatorsOff;    
+    private figure nowFigure;
+
+    private typeButtonSPSV sPSVNow;
+
+    public Action<typeButtonSPSV> changeTypeSPVSEvent;
+    private void Awake()
+    {
+        SPSVButtonImageDict.Add(typeButtonSPSV.√Œ“, SPSVButtonImage[0]);
+        SPSVButtonImageDict.Add(typeButtonSPSV.TA, SPSVButtonImage[1]);
+        SPSVButtonImageDict.Add(typeButtonSPSV.T_RA, SPSVButtonImage[2]);
+    }
 
     public void NewSimulation()
     {
+        sPSVNow = typeButtonSPSV.T_RA;
+        SPSVButtonPressed();        
         TraficTrafic_ClearOfConflict();
         angleNow = 360;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
@@ -49,8 +65,8 @@ public class UIManager : MonoBehaviour
 
     public void ChangeFigura(figure nowFigure)
     {
-        if (nowFigure == figure.redSquare && redSquareNotInd) return;
         figureObject.sprite = figures[(int)nowFigure];
+        this.nowFigure = nowFigure;
     }
 
 
@@ -652,55 +668,49 @@ public class UIManager : MonoBehaviour
     }
     public void FiguraOff()
     {
-        figureObject.gameObject.SetActive(false);
+        figureObject.color = new Color32(255, 255, 255, 0);
     }
     public void FiguraOn()
     {
-        figureObject.gameObject.SetActive(true);
-    }
+        figureObject.color = new Color32(255, 255, 255, 255);
+    } 
     public void RedSquareOff()
     {
-        redSquareNotInd = true;
+        figures[(int)figure.redSquare] = emptySquare;
+        ChangeFigura(nowFigure);
     }
     public void RedSquareOn()
     {
-        redSquareNotInd = false;
+        figures[(int)figure.redSquare] = redSquare;
+        ChangeFigura(nowFigure);
     }
-    public void SPSVButtonPressed(typeButtonSPSV typeButtonSPSV)
+    public void SPSVButtonPressed()
     {
-        
-        foreach (Button button in SPSVButtons)
+        NextTypeSPSV();
+        SPSVOptionButton.gameObject.GetComponent<Image>().sprite = SPSVButtonImageDict[sPSVNow];
+        changeTypeSPVSEvent?.Invoke(sPSVNow);
+    }
+    private void NextTypeSPSV()
+    {
+        if (sPSVNow == typeButtonSPSV.√Œ“)
         {
-            if (typeButtonSPSV == button.GetComponent<ButtonSPSV>().TypeButtonSPSV)
+            sPSVNow = typeButtonSPSV.TA;
+        }
+        else
+        {
+            if (sPSVNow == typeButtonSPSV.TA)
             {
-                button.gameObject.GetComponent<Image>().color = Color.green;
+                sPSVNow = typeButtonSPSV.T_RA;
             }
             else
             {
-                button.gameObject.GetComponent<Image>().color = Color.white;
+                if (sPSVNow == typeButtonSPSV.T_RA)
+                {
+                    sPSVNow = typeButtonSPSV.√Œ“;
+                }
             }
         }
-    }
-    public void SPSVTestButtonOn()
-    {
-        foreach (Button button in SPSVButtons)
-        {
-            if (button.GetComponent<ButtonSPSV>().TypeButtonSPSV == typeButtonSPSV.TEST)
-            {
-                button.gameObject.GetComponent<Image>().color = Color.green;
-            }
-        }
-    }
-    public void SPSVTestButtonOff()
-    {
-        foreach (Button button in SPSVButtons)
-        {
-            if (button.GetComponent<ButtonSPSV>().TypeButtonSPSV == typeButtonSPSV.TEST)
-            {
-                button.gameObject.GetComponent<Image>().color = Color.white;
-            }
-        }
-    }
+    }    
 }
 
 public enum typeButtonSPSV
@@ -710,5 +720,4 @@ public enum typeButtonSPSV
     √Œ“,
     TEST,
 }
-
 

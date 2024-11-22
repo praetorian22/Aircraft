@@ -31,6 +31,7 @@ public class ControllSimulation : MonoBehaviour
     {
         soundManager = GetComponent<SoundManager>();
         uIManager = GetComponent<UIManager>();
+        uIManager.changeTypeSPVSEvent += ChangeSPSVOption;
     }
 
     private void Start()
@@ -53,46 +54,51 @@ public class ControllSimulation : MonoBehaviour
         airEnemy.transform.position = pointAirEnemy.transform.position;
         airAlly.transform.position = pointAirAlly.transform.position;
         airEnemy.GetComponent<ControllEnemy>().NewSimulation();        
-        airAlly.GetComponent<ControlAlly>().NewSimulation();
-        GOTPress();
+        airAlly.GetComponent<ControlAlly>().NewSimulation();        
     }    
+
+    private void ChangeSPSVOption(typeButtonSPSV typeButtonSPSV)
+    {
+        switch (typeButtonSPSV)
+        {
+            case typeButtonSPSV.√Œ“:
+                {
+                    GOTPress();
+                    break;
+                }
+            case typeButtonSPSV.TA:
+                {
+                    TAPress();
+                    break;
+                }
+            case typeButtonSPSV.T_RA:
+                {
+                    T_RAPress();
+                    break;
+                }
+        }
+    }
 
     public void GOTPress()
     {
-        uIManager.SPSVButtonPressed(typeButtonSPSV.√Œ“);
         uIManager.AllIndicatorsOff();
-        uIManager.FiguraOff();
+        uIManager.FiguraOff();        
         soundManager.SoundOff();
     }
     public void TAPress()
     {
-        uIManager.SPSVButtonPressed(typeButtonSPSV.TA);
-        uIManager.AllIndicatorsOff();
-        uIManager.FiguraOn();
+        uIManager.AllIndicatorsOff();        
+        uIManager.FiguraOn();  
         uIManager.RedSquareOff();
         soundManager.SoundOn();
         soundManager.TaSPSVOn();
     }
     public void T_RAPress()
     {
-        uIManager.SPSVButtonPressed(typeButtonSPSV.T_RA);
         uIManager.AllIndicatorsOn();
         uIManager.FiguraOn();
         uIManager.RedSquareOn();
         soundManager.SoundOn();
         soundManager.TaSPSVOff();
-    }
-    public void TestPress()
-    {
-        if (testPressCoro == null) testPressCoro = StartCoroutine(TestPressCoro());
-    }
-
-    private IEnumerator TestPressCoro()
-    {
-        yield return new WaitForSeconds(5f);
-        uIManager.SPSVTestButtonOn();
-        yield return new WaitForSeconds(1f);
-        uIManager.SPSVTestButtonOff();
-        testPressCoro = null;
-    }
+    }    
 }

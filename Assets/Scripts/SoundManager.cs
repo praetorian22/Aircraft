@@ -24,8 +24,7 @@ public class SoundManager : MonoBehaviour
 
     public void NewSimulation()
     {
-        typeTrack = typeTrack.none;
-        SoundTraffic_Traffic();
+        typeTrack = typeTrack.none;        
     }
 
     private void MakeSound(AudioClip original, Vector3 position)
