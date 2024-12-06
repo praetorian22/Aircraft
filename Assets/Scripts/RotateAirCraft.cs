@@ -35,11 +35,11 @@ public class RotateAirCraft : MonoBehaviour
         angleTarget = targetAngleList[6];
     }
 
-    public void NewSimulation(float speedRotation)
+    public void NewSimulation(float speedRotation, int defAngleIndex)
     {
-        angleNow = targetAngleList[6];
-        angleTarget = targetAngleList[6];
-        index = 6;
+        angleNow = targetAngleList[defAngleIndex];
+        angleTarget = targetAngleList[defAngleIndex];
+        index = defAngleIndex;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
         this.speedRotation = speedRotation;
     }

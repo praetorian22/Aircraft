@@ -18,7 +18,7 @@ public class ControllEnemy : MonoBehaviour
 
     public void NewSimulation()
     {
-        rotateAirCraft.NewSimulation(defaultRotation);
+        rotateAirCraft.NewSimulation(defaultRotation, 6);
         moveAirCraft.NewSimulation(defaultSpeed);
     }
 

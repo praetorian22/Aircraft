@@ -39,9 +39,9 @@ public class ControlAlly : MonoBehaviour
 
     [SerializeField] private float dangerExpansionSpeed;
 
-    [SerializeField] private int crossingAngleChange;
-    [SerializeField] private int criticalAngleClimb;
-    [SerializeField] private int criticalAngleDescent;
+    [SerializeField] private float crossingAngleChange;
+    [SerializeField] private float criticalAngleClimb;
+    [SerializeField] private float criticalAngleDescent;
 
     [SerializeField] private float timeReactionAlly;
 
@@ -75,7 +75,7 @@ public class ControlAlly : MonoBehaviour
         expansionSpeed = 0f;
         stopMovementChange = false;
         notDangerous = false;
-        rotateAirCraft.NewSimulation(defaultRotation);        
+        rotateAirCraft.NewSimulation(defaultRotation, 4);        
         moveAirCraft.NewSimulation(defaultSpeed);
         soundManager.NewSimulation();
         uiManager.NewSimulation();

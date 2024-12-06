@@ -3395,8 +3395,8 @@ MonoBehaviour:
   forwardPoint: {fileID: 1281411113}
   upDown: 1
   targetAngleList:
-  - 330
-  - 335
+  - 337.5
+  - 338
   - 340
   - 345
   - 350
@@ -3406,8 +3406,8 @@ MonoBehaviour:
   - 370
   - 375
   - 380
-  - 385
-  - 390
+  - 381
+  - 382.5
   angleNow: 0
   angleTarget: 0
   index: 6
@@ -4316,9 +4316,9 @@ MonoBehaviour:
   dangerDistanceVertical: 0.9
   dangerExpansionSpeed: -0.0003
   crossingAngleChange: 30
-  criticalAngleClimb: 330
-  criticalAngleDescent: 390
-  timeReactionAlly: 0.01
+  criticalAngleClimb: 350
+  criticalAngleDescent: 370
+  timeReactionAlly: 1
   maxTime_timeEmptyDiamond: 30
   timeChangeDiamond: 28
   timeChangeCircle: 25
@@ -4346,19 +4346,15 @@ MonoBehaviour:
   forwardPoint: {fileID: 1176217369}
   upDown: 1
   targetAngleList:
-  - 330
-  - 335
+  - 337.5
   - 340
   - 345
   - 350
-  - 355
   - 360
-  - 365
   - 370
   - 375
   - 380
-  - 385
-  - 390
+  - 382.5
   angleNow: 0
   angleTarget: 0
   index: 6
