@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip climb_climp_now;
     [SerializeField] private AudioClip descent_descent_now;
     [SerializeField] private AudioClip clear_of_conflict;
+    [SerializeField] private AudioClip maintain_vertical_speed;
 
     private bool taSPSV;
 
@@ -87,6 +88,10 @@ public class SoundManager : MonoBehaviour
     {
         if (typeTrack != typeTrack.clear_of_conflict) MakeSoundCicle(clear_of_conflict);
     }
+    public void SoundMaintain_Vertical_Speed()
+    {
+        if (typeTrack != typeTrack.maintain_vertical_speed) MakeSoundCicle(maintain_vertical_speed);
+    }
 
     public void SoundOff()
     {
@@ -123,5 +128,6 @@ public enum typeTrack
     climb_climp_now,
     descent_descent_now,
     clear_of_conflict,
+    maintain_vertical_speed,
     none,
 }

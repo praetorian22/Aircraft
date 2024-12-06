@@ -12,14 +12,12 @@ public class MoveAirCraft : MonoBehaviour
         if (ally) transform.Translate(Vector3.left * speed * Time.deltaTime);
         else transform.Translate(Vector3.right * speed * Time.deltaTime);        
     }
-
-    public void NewSimulation(float speed)
-    {
-        this.speed = speed;
-    }
-
     public void UPSpeed(float val)
     {
         speed += val;
+    }
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
     }
 }

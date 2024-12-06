@@ -76,7 +76,7 @@ public class ControlAlly : MonoBehaviour
         stopMovementChange = false;
         notDangerous = false;
         rotateAirCraft.NewSimulation(defaultRotation, 4);        
-        moveAirCraft.NewSimulation(defaultSpeed);
+        moveAirCraft.SetSpeed(defaultSpeed);
         soundManager.NewSimulation();
         uiManager.NewSimulation();
         if (timeCoro != null) StopCoroutine(timeCoro);
@@ -113,14 +113,14 @@ public class ControlAlly : MonoBehaviour
                     if (random == 0)
                     {
                         SetTarget(true);
-                        soundManager.SoundDescent_Descent();
-                        uiManager.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.AngleTaret);
+                        //soundManager.SoundDescent_Descent();
+                        //uiManager.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.AngleTaret);
                     }
                     else
                     {
                         SetTarget(false);
-                        soundManager.SoundClimb_Climb();
-                        uiManager.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.AngleTaret);
+                        //soundManager.SoundClimb_Climb();
+                        //uiManager.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.AngleTaret);
                     }
 
                 }
@@ -129,16 +129,14 @@ public class ControlAlly : MonoBehaviour
                     if (enemyRotateAirCraft.MoveDown)
                     {
                         SetTarget(false);
-                        soundManager.SoundClimb_Climb();
-                        uiManager.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.AngleTaret);
+                        
                     }
                     else
                     {
                         if (enemyRotateAirCraft.MoveUp)
                         {
                             SetTarget(true);
-                            soundManager.SoundDescent_Descent();
-                            uiManager.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.AngleTaret);
+                            
                         }
                     }
                 }
@@ -155,6 +153,7 @@ public class ControlAlly : MonoBehaviour
                 uiManager.ChangeFigura(nowFigure);
                 soundManager.SoundClear_Of_Conflict();
                 uiManager.TraficTrafic_ClearOfConflict();
+                moveAirCraft.SetSpeed(defaultSpeed);
             }
 
             if (enemyAirCraft.transform.position.x > gameObject.transform.position.x)
@@ -212,15 +211,15 @@ public class ControlAlly : MonoBehaviour
                         {
                             if (minDistanceClimb_Descent_Crossing <= distanceAir && distanceAir < maxDistanceClimb_Descent_Crossing)
                             {
-                                SetTargetCrossing();
+                                //SetTargetCrossing();
                                 rotateAirCraft.UpSpeedRotation(upRotationForStopControll);
-                                stopMovementChange = true;
+                                //stopMovementChange = true;
                             }
                             else
                             {
                                 if (distanceAir <= minDistanceStopControll)
                                 {
-                                    moveAirCraft.UPSpeed(upSpeedForStopControll);
+                                    //moveAirCraft.UPSpeed(upSpeedForStopControll);
                                     stopMovementChange = true;
                                 }
                             }
@@ -246,8 +245,28 @@ public class ControlAlly : MonoBehaviour
             next = rotateAirCraft.NextAngle();
             if (next)
             {
-                soundManager.SoundIncrease_Descent();
-                uiManager.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.AngleTaret);
+                if (rotateAirCraft.AngleTaret == 375) 
+                {
+                    soundManager.SoundIncrease_Descent();
+                    uiManager.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.AngleTaret);
+                }
+                else
+                {
+                    if (rotateAirCraft.AngleTaret > 375)
+                    {
+                        soundManager.SoundMaintain_Vertical_Speed();
+                        uiManager.Maintain(rotateAirCraft.AngleTaret);
+                        moveAirCraft.UPSpeed(upSpeedForStopControll);
+                    }
+                    else
+                    {
+                        if (rotateAirCraft.AngleTaret == 370)
+                        {
+                            soundManager.SoundDescent_Descent();
+                            uiManager.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.AngleTaret);
+                        }
+                    }
+                }
             }                    
         }
         else
@@ -256,8 +275,28 @@ public class ControlAlly : MonoBehaviour
             next = rotateAirCraft.PrewAngle();
             if (next)
             {
-                soundManager.SoundIncrease_Climp();
-                uiManager.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.AngleTaret);
+                if (rotateAirCraft.AngleTaret == 345)
+                {
+                    soundManager.SoundIncrease_Climp();
+                    uiManager.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.AngleTaret);
+                }
+                else
+                {
+                    if (rotateAirCraft.AngleTaret < 345)
+                    {
+                        soundManager.SoundMaintain_Vertical_Speed();
+                        uiManager.Maintain(rotateAirCraft.AngleTaret);
+                        moveAirCraft.UPSpeed(upSpeedForStopControll);
+                    } 
+                    else
+                    {
+                        if (rotateAirCraft.AngleTaret == 350)
+                        {
+                            soundManager.SoundClimb_Climb();
+                            uiManager.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.AngleTaret);
+                        }
+                    }
+                }
             }                    
         }        
     }
@@ -266,14 +305,14 @@ public class ControlAlly : MonoBehaviour
         if (!targetUp)
         {
             targetUp = true;
-            rotateAirCraft.SetAngle(rotateAirCraft.AngleTaret + crossingAngleChange);
+            rotateAirCraft.SetAngle(350);
             soundManager.SoundCrossing_Descent();
             uiManager.DescentDescent_IncreaseDescent_CrossingDescent(rotateAirCraft.AngleTaret);
         }
         else
         {
             targetUp = false;
-            rotateAirCraft.SetAngle(rotateAirCraft.AngleTaret - crossingAngleChange);
+            rotateAirCraft.SetAngle(370);
             soundManager.SoundCrossing_Climb();
             uiManager.ClimbClimb_IncreaseClimb_CrossingClimb(rotateAirCraft.AngleTaret);
         }
@@ -286,6 +325,7 @@ public class ControlAlly : MonoBehaviour
             rotateAirCraft.SetAngle(criticalAngleClimb);
             soundManager.SoundClimb_Climp_Now();
             uiManager.Climb_ClimbNow();
+            moveAirCraft.SetSpeed(defaultSpeed);
         }
         else
         {
@@ -293,6 +333,7 @@ public class ControlAlly : MonoBehaviour
             rotateAirCraft.SetAngle(criticalAngleDescent);
             soundManager.SoundDescent_Descent_Now();
             uiManager.Descent_DescentNow();
+            moveAirCraft.SetSpeed(defaultSpeed);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

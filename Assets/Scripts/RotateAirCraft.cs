@@ -24,15 +24,15 @@ public class RotateAirCraft : MonoBehaviour
     public Action<float> changeAngleEvent;
     public float AngleTaret => angleTarget;
 
-    public bool Horizont => index == 6;
+    public bool Horizont => index == (targetAngleList.Count - 1) / 2;
 
     public float vertPositionB => backPoint.transform.position.y;
     public float vertPositionF => forwardPoint.transform.position.y;
 
     private void Start()
     {
-        angleNow = targetAngleList[6];
-        angleTarget = targetAngleList[6];
+        angleNow = targetAngleList[(targetAngleList.Count - 1)];
+        angleTarget = targetAngleList[(targetAngleList.Count - 1)];
     }
 
     public void NewSimulation(float speedRotation, int defAngleIndex)
@@ -64,8 +64,8 @@ public class RotateAirCraft : MonoBehaviour
     }
     public bool NextAngle(int val = 1)
     {
-        if (index == 12) return false;
-        if (index + val < 12)
+        if (index == (targetAngleList.Count - 1)) return false;
+        if (index + val < (targetAngleList.Count - 1))
         {
             index += val;
             angleTarget = targetAngleList[index];
@@ -73,7 +73,7 @@ public class RotateAirCraft : MonoBehaviour
         }
         else
         {
-            index = 12;
+            index = targetAngleList.Count - 1;
             angleTarget = targetAngleList[index];
             return true;
         }
@@ -96,36 +96,36 @@ public class RotateAirCraft : MonoBehaviour
     }
     public bool NextAngleOne(float val = 1)
     {
-        if (angleTarget == 390) return false;
-        if (angleTarget + val < 390)
+        if (angleTarget == targetAngleList[targetAngleList.Count - 1]) return false;
+        if (angleTarget + val < targetAngleList[targetAngleList.Count - 1])
         {
             angleTarget += val;
             return true;
         }
         else
         {
-            angleTarget = 390;
+            angleTarget = targetAngleList[targetAngleList.Count - 1];
             return true;
         }
     }
     public bool PrewAngleOne(float val = 1)
     {
-        if (angleTarget == 330) return false;
-        if (angleTarget - val > 330)
+        if (angleTarget == targetAngleList[0]) return false;
+        if (angleTarget - val > targetAngleList[0])
         {
             angleTarget -= val;            
             return true;
         }
         else
         {
-            angleTarget = 330;            
+            angleTarget = targetAngleList[0];            
             return true;
         }
     }
 
     public void AngleZero()
     {
-        index = 6;
+        index = (targetAngleList.Count - 1) / 2;
         angleTarget = targetAngleList[index];
     }
 

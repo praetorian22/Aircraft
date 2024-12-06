@@ -17,16 +17,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<Image> sectors_0_2_5down = new List<Image>();
     [SerializeField] private List<Image> sectors_2_5_5up = new List<Image>();
     [SerializeField] private List<Image> sectors_2_5_5down = new List<Image>();    
-    [SerializeField] private List<Image> sectors_5_10up = new List<Image>();
-    [SerializeField] private List<Image> sectors_5_10down = new List<Image>();
+    [SerializeField] private List<Image> sectors_5_7_5up = new List<Image>();
+    [SerializeField] private List<Image> sectors_5_7_5down = new List<Image>();
+    [SerializeField] private List<Image> sectors_7_5_10up = new List<Image>();
+    [SerializeField] private List<Image> sectors_7_5_10down = new List<Image>();
     [SerializeField] private List<Image> sectors_10_15up = new List<Image>();
     [SerializeField] private List<Image> sectors_10_15down = new List<Image>();
     [SerializeField] private List<Image> sectors_15_20up = new List<Image>();
     [SerializeField] private List<Image> sectors_15_20down = new List<Image>();
-    [SerializeField] private List<Image> sectors_20_25up = new List<Image>();
-    [SerializeField] private List<Image> sectors_20_25down = new List<Image>();
-    [SerializeField] private List<Image> sectors_25_30up = new List<Image>();
-    [SerializeField] private List<Image> sectors_25_30down = new List<Image>();
+    [SerializeField] private List<Image> sectors_20_225up = new List<Image>();
+    [SerializeField] private List<Image> sectors_20_225down = new List<Image>();
+    //[SerializeField] private List<Image> sectors_25_30up = new List<Image>();
+    //[SerializeField] private List<Image> sectors_25_30down = new List<Image>();
 
     [SerializeField] private GameObject arrow;
     [SerializeField] private float angleNow;
@@ -78,281 +80,149 @@ public class UIManager : MonoBehaviour
     {
         if (up)
         {
-            SetSector025upEmty();
+            SetSector025upGreen();
             SetSector255upEmty();
-            SetSector510upEmty();
+            SetSector575upEmty();
+            SetSector7510upEmty();
             SetSector1015upEmty();
             SetSector1520upEmty();
-            SetSector2025upEmty();
-            SetSector2530upEmty();
+            SetSector20225upEmty();
+            //SetSector2530upEmty();
 
             SetSector025downRed();
             SetSector255downRed();
-            SetSector510downRed();
+            SetSector575downRed();
+            SetSector7510downRed();
             SetSector1015downRed();
             SetSector1520downRed();
-            SetSector2025downRed();
-            SetSector2530downRed();
+            SetSector20225downRed();
+            //SetSector2530downRed();
         }
         else
         {
-            SetSector025downEmty();
+            SetSector025downGreen();
             SetSector255downEmty();
-            SetSector510downEmty();
+            SetSector575downEmty();
+            SetSector7510downEmty();
             SetSector1015downEmty();
             SetSector1520downEmty();
-            SetSector2025downEmty();
-            SetSector2530downEmty();
+            SetSector20225downEmty();
+            //SetSector2530downEmty();
 
             SetSector025upRed();
             SetSector255upRed();
-            SetSector510upRed();
+            SetSector575upRed();
+            SetSector7510upRed();
             SetSector1015upRed();
             SetSector1520upRed();
-            SetSector2025upRed();
-            SetSector2530upRed();
+            SetSector20225upRed();
+            //SetSector2530upRed();
         }
     }
     public void TraficTrafic_ClearOfConflict()
     {        
         SetSector025upEmty();
         SetSector255upEmty();
-        SetSector510upEmty();
+        SetSector575upEmty();
+        SetSector7510upEmty();
         SetSector1015upEmty();
-        SetSector1520upEmty();
-        SetSector025upEmty();
-        SetSector2025upEmty();
-        SetSector2530upEmty();
+        SetSector1520upEmty();        
+        SetSector20225upEmty();
+        //SetSector2530upEmty();
         SetSector025downEmty();
         SetSector255downEmty();
-        SetSector510downEmty();
+        SetSector575downEmty();
+        SetSector7510downEmty();
         SetSector1015downEmty();
-        SetSector1520downEmty();
-        SetSector025downEmty();
-        SetSector2025downEmty();
-        SetSector2530downEmty();
+        SetSector1520downEmty();        
+        SetSector20225downEmty();
+        //SetSector2530downEmty();
     }
 
     public void ClimbClimb_IncreaseClimb_CrossingClimb(float angle)
     {
-        if (angle == 355)
-        {
-            SetSector025upRed();
-            SetSector255upGreen();
-            SetSector510upEmty();
-            SetSector1015upEmty();
-            SetSector1520upEmty();
-            SetSector2025upEmty();
-            SetSector2530upEmty();
-
-            SetSector025downRed();
-            SetSector255downRed();
-            SetSector510downRed();
-            SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector2025downRed();
-            SetSector2530downRed();
-        }
         if (angle == 350)
         {
             SetSector025upRed();
             SetSector255upRed();
-            SetSector510upGreen();
+            SetSector575upRed();
+            SetSector7510upGreen();
             SetSector1015upEmty();
             SetSector1520upEmty();
-            SetSector2025upEmty();
-            SetSector2530upEmty();
+            SetSector20225upEmty();
+            //SetSector2530upEmty();
 
             SetSector025downRed();
             SetSector255downRed();
-            SetSector510downRed();
+            SetSector575downRed();
+            SetSector7510downRed();
             SetSector1015downRed();
             SetSector1520downRed();
-            SetSector2025downRed();
-            SetSector2530downRed();
+            SetSector20225downRed();
+            //SetSector2530downRed();
         }
         if (angle == 345)
         {
             SetSector025upRed();
             SetSector255upRed();
-            SetSector510upRed();
+            SetSector575upRed();
+            SetSector7510upRed();
             SetSector1015upGreen();
             SetSector1520upEmty();
-            SetSector2025upEmty();
-            SetSector2530upEmty();
+            SetSector20225upEmty();
+            //SetSector2530upEmty();
 
             SetSector025downRed();
             SetSector255downRed();
-            SetSector510downRed();
+            SetSector575downRed();
+            SetSector7510downRed();
             SetSector1015downRed();
             SetSector1520downRed();
-            SetSector2025downRed();
-            SetSector2530downRed();
-        }
-        if (angle == 340)
-        {
-            SetSector025upRed();
-            SetSector255upRed();
-            SetSector510upRed();
-            SetSector1015upRed();
-            SetSector1520upGreen();
-            SetSector2025upEmty();
-            SetSector2530upEmty();
-
-            SetSector025downRed();
-            SetSector255downRed();
-            SetSector510downRed();
-            SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector2025downRed();
-            SetSector2530downRed();
-        }
-        if (angle == 335)
-        {
-            SetSector025upRed();
-            SetSector255upRed();
-            SetSector510upRed();
-            SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector2025upGreen();
-            SetSector2530upEmty();
-
-            SetSector025downRed();
-            SetSector255downRed();
-            SetSector510downRed();
-            SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector2025downRed();
-            SetSector2530downRed();
-        }
-        if (angle == 330)
-        {
-            SetSector025upRed();
-            SetSector255upRed();
-            SetSector510upRed();
-            SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector2025upRed();
-            SetSector2530upGreen();
-
-            SetSector025downRed();
-            SetSector255downRed();
-            SetSector510downRed();
-            SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector2025downRed();
-            SetSector2530downRed();
+            SetSector20225downRed();
+            //SetSector2530downRed();
         }
     }
     public void DescentDescent_IncreaseDescent_CrossingDescent(float angle)
     {
-        if (angle == 365)
-        {
-            SetSector025downRed();
-            SetSector255downGreen();
-            SetSector510downEmty();
-            SetSector1015downEmty();
-            SetSector1520downEmty();
-            SetSector2025downEmty();
-            SetSector2530downEmty();
-
-            SetSector025upRed();
-            SetSector255upRed();
-            SetSector510upRed();
-            SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector2025upRed();
-            SetSector2530upRed();
-        }
         if (angle == 370)
         {
             SetSector025downRed();
             SetSector255downRed();
-            SetSector510downGreen();
+            SetSector575downRed();
+            SetSector7510downGreen();
             SetSector1015downEmty();
             SetSector1520downEmty();
-            SetSector2025downEmty();
-            SetSector2530downEmty();
+            SetSector20225downEmty();
+            //SetSector2530downEmty();
 
             SetSector025upRed();
             SetSector255upRed();
-            SetSector510upRed();
+            SetSector575upRed();
+            SetSector7510upRed();
             SetSector1015upRed();
             SetSector1520upRed();
-            SetSector2025upRed();
-            SetSector2530upRed();
+            SetSector20225upRed();
+            //SetSector2530upRed();
         }
         if (angle == 375)
         {
             SetSector025downRed();
             SetSector255downRed();
-            SetSector510downRed();
+            SetSector575downRed();
+            SetSector7510downRed();
             SetSector1015downGreen();
             SetSector1520downEmty();
-            SetSector2025downEmty();
-            SetSector2530downEmty();
+            SetSector20225downEmty();
+            //SetSector2530downEmty();
 
             SetSector025upRed();
             SetSector255upRed();
-            SetSector510upRed();
+            SetSector575upRed();
+            SetSector7510upRed();
             SetSector1015upRed();
             SetSector1520upRed();
-            SetSector2025upRed();
-            SetSector2530upRed();
-        }
-        if (angle == 380)
-        {
-            SetSector025downRed();
-            SetSector255downRed();
-            SetSector510downRed();
-            SetSector1015downRed();
-            SetSector1520downGreen();
-            SetSector2025downEmty();
-            SetSector2530downEmty();
-
-            SetSector025upRed();
-            SetSector255upRed();
-            SetSector510upRed();
-            SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector2025upRed();
-            SetSector2530upRed();
-        }
-        if (angle == 385)
-        {
-            SetSector025downRed();
-            SetSector255downRed();
-            SetSector510downRed();
-            SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector2025downGreen();
-            SetSector2530downEmty();
-
-            SetSector025upRed();
-            SetSector255upRed();
-            SetSector510upRed();
-            SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector2025upRed();
-            SetSector2530upRed();
-        }
-        if (angle == 390)
-        {
-            SetSector025downRed();
-            SetSector255downRed();
-            SetSector510downRed();
-            SetSector1015downRed();
-            SetSector1520downRed();
-            SetSector2025downRed();
-            SetSector2530downGreen();
-
-            SetSector025upRed();
-            SetSector255upRed();
-            SetSector510upRed();
-            SetSector1015upRed();
-            SetSector1520upRed();
-            SetSector2025upRed();
-            SetSector2530upRed();
+            SetSector20225upRed();
+            //SetSector2530upRed();
         }
     }
 
@@ -360,37 +230,84 @@ public class UIManager : MonoBehaviour
     {
         SetSector025upRed();
         SetSector255upRed();
-        SetSector510upRed();
-        SetSector1015upRed();
-        SetSector1520upRed();
-        SetSector2025upRed();
-        SetSector2530upGreen();
+        SetSector575upRed();
+        SetSector7510upGreen();
+        SetSector1015upEmty();
+        SetSector1520upEmty();
+        SetSector20225upEmty();
+        //SetSector2530upEmty();
 
         SetSector025downRed();
         SetSector255downRed();
-        SetSector510downRed();
+        SetSector575downRed();
+        SetSector7510downRed();
         SetSector1015downRed();
         SetSector1520downRed();
-        SetSector2025downRed();
-        SetSector2530downRed();
+        SetSector20225downRed();
+        //SetSector2530downRed();
     }
     public void Descent_DescentNow()
     {
         SetSector025downRed();
         SetSector255downRed();
-        SetSector510downRed();
-        SetSector1015downRed();
-        SetSector1520downRed();
-        SetSector2025downRed();
-        SetSector2530downGreen();
+        SetSector575downRed();
+        SetSector7510downGreen();
+        SetSector1015downEmty();
+        SetSector1520downEmty();
+        SetSector20225downEmty();
+        //SetSector2530downEmty();
 
         SetSector025upRed();
         SetSector255upRed();
-        SetSector510downRed();
+        SetSector575upRed();
+        SetSector7510upRed();
         SetSector1015upRed();
         SetSector1520upRed();
-        SetSector2025upRed();
-        SetSector2530upRed();
+        SetSector20225upRed();
+        //SetSector2530upRed();
+    }
+    public void Maintain(float angle)
+    {
+        if (angle > 370)
+        {
+            SetSector025downRed();
+            SetSector255downRed();
+            SetSector575downRed();
+            SetSector7510downRed();
+            SetSector1015downGreen();
+            SetSector1520downGreen();
+            SetSector20225downGreen();
+            //SetSector2530downEmty();
+
+            SetSector025upRed();
+            SetSector255upRed();
+            SetSector575upRed();
+            SetSector7510upRed();
+            SetSector1015upRed();
+            SetSector1520upRed();
+            SetSector20225upRed();
+            //SetSector2530upRed();
+        }
+        if (angle < 350)
+        {
+            SetSector025upRed();
+            SetSector255upRed();
+            SetSector575upRed();
+            SetSector7510upRed();
+            SetSector1015upGreen();
+            SetSector1520upGreen();
+            SetSector20225upGreen();
+            //SetSector2530downEmty();
+
+            SetSector025downRed();
+            SetSector255downRed();
+            SetSector575downRed();
+            SetSector7510downRed();
+            SetSector1015downRed();
+            SetSector1520downRed();
+            SetSector20225downRed();
+            //SetSector2530upRed();
+        }
     }
 
     private void SetSectorsColor(List<Image> list, Color32 color)
@@ -451,31 +368,54 @@ public class UIManager : MonoBehaviour
         SetSectorsColor(sectors_2_5_5down, colorEmpty);
     }
 
-    private void SetSector510upRed()
+    private void SetSector575upRed()
     {
-        SetSectorsColor(sectors_5_10up, colorRed);
+        SetSectorsColor(sectors_5_7_5up, colorRed);
     }
-    private void SetSector510upGreen()
+    private void SetSector575upGreen()
     {
-        SetSectorsColor(sectors_5_10up, colorGreen);
+        SetSectorsColor(sectors_5_7_5up, colorGreen);
     }
-    private void SetSector510upEmty()
+    private void SetSector575upEmty()
     {
-        SetSectorsColor(sectors_5_10up, colorEmpty);
+        SetSectorsColor(sectors_5_7_5up, colorEmpty);
     }
-    private void SetSector510downRed()
+    private void SetSector575downRed()
     {
-        SetSectorsColor(sectors_5_10down, colorRed);
+        SetSectorsColor(sectors_5_7_5down, colorRed);
     }
-    private void SetSector510downGreen()
+    private void SetSector575downGreen()
     {
-        SetSectorsColor(sectors_5_10down, colorGreen);
+        SetSectorsColor(sectors_5_7_5down, colorGreen);
     }
-    private void SetSector510downEmty()
+    private void SetSector575downEmty()
     {
-        SetSectorsColor(sectors_5_10down, colorEmpty);
+        SetSectorsColor(sectors_5_7_5down, colorEmpty);
     }
-
+    private void SetSector7510upRed()
+    {
+        SetSectorsColor(sectors_7_5_10up, colorRed);
+    }
+    private void SetSector7510upGreen()
+    {
+        SetSectorsColor(sectors_7_5_10up, colorGreen);
+    }
+    private void SetSector7510upEmty()
+    {
+        SetSectorsColor(sectors_7_5_10up, colorEmpty);
+    }
+    private void SetSector7510downRed()
+    {
+        SetSectorsColor(sectors_7_5_10down, colorRed);
+    }
+    private void SetSector7510downGreen()
+    {
+        SetSectorsColor(sectors_7_5_10down, colorGreen);
+    }
+    private void SetSector7510downEmty()
+    {
+        SetSectorsColor(sectors_7_5_10down, colorEmpty);
+    }
     private void SetSector1015upRed()
     {
         SetSectorsColor(sectors_10_15up, colorRed);
@@ -526,31 +466,31 @@ public class UIManager : MonoBehaviour
         SetSectorsColor(sectors_15_20down, colorEmpty);
     }
 
-    private void SetSector2025upRed()
+    private void SetSector20225upRed()
     {
-        SetSectorsColor(sectors_20_25up, colorRed);
+        SetSectorsColor(sectors_20_225up, colorRed);
     }
-    private void SetSector2025upGreen()
+    private void SetSector20225upGreen()
     {
-        SetSectorsColor(sectors_20_25up, colorGreen);
+        SetSectorsColor(sectors_20_225up, colorGreen);
     }
-    private void SetSector2025upEmty()
+    private void SetSector20225upEmty()
     {
-        SetSectorsColor(sectors_20_25up, colorEmpty);
+        SetSectorsColor(sectors_20_225up, colorEmpty);
     }
-    private void SetSector2025downRed()
+    private void SetSector20225downRed()
     {
-        SetSectorsColor(sectors_20_25down, colorRed);
+        SetSectorsColor(sectors_20_225down, colorRed);
     }
-    private void SetSector2025downGreen()
+    private void SetSector20225downGreen()
     {
-        SetSectorsColor(sectors_20_25down, colorGreen);
+        SetSectorsColor(sectors_20_225down, colorGreen);
     }
-    private void SetSector2025downEmty()
+    private void SetSector20225downEmty()
     {
-        SetSectorsColor(sectors_20_25down, colorEmpty);
+        SetSectorsColor(sectors_20_225down, colorEmpty);
     }
-
+    /*
     private void SetSector2530upRed()
     {
         SetSectorsColor(sectors_25_30up, colorRed);
@@ -575,7 +515,7 @@ public class UIManager : MonoBehaviour
     {
         SetSectorsColor(sectors_25_30down, colorEmpty);
     }
-
+    */
     private void Update()
     {
         arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
