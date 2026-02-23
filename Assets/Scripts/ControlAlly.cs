@@ -212,7 +212,7 @@ public class ControlAlly : MonoBehaviour
                             if (minDistanceClimb_Descent_Crossing <= distanceAir && distanceAir < maxDistanceClimb_Descent_Crossing)
                             {
                                 //SetTargetCrossing();
-                                rotateAirCraft.UpSpeedRotation(upRotationForStopControll);
+                                //rotateAirCraft.UpSpeedRotation(upRotationForStopControll);
                                 //stopMovementChange = true;
                             }
                             else
