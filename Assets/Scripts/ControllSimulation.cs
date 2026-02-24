@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControllSimulation : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ControllSimulation : MonoBehaviour
     [SerializeField] private GameObject airAlly;
     
     private UIManager uIManager;
+    
     private SoundManager soundManager;
     public void PressPause()
     {
@@ -29,13 +31,14 @@ public class ControllSimulation : MonoBehaviour
     private void Awake()
     {
         soundManager = GetComponent<SoundManager>();
-        uIManager = GetComponent<UIManager>();
+        uIManager = GetComponent<UIManager>();        
         uIManager.changeTypeSPVSEvent += ChangeSPSVOption;
+        uIManager.airButtonPressEvent += StartAirScene;
     }
 
-    private void Start()
+    public void StartAirScene()
     {
-        ResetSimulation();
+        ResetAirSimulation();
     }
 
     private void Update()
@@ -46,14 +49,14 @@ public class ControllSimulation : MonoBehaviour
         }
     }
 
-    public void ResetSimulation()
+    public void ResetAirSimulation()
     {
         airEnemy.SetActive(true);
         airAlly.SetActive(true);
         airEnemy.transform.position = pointAirEnemy.transform.position;
         airAlly.transform.position = pointAirAlly.transform.position;
-        airEnemy.GetComponent<ControllEnemy>().NewSimulation();        
-        airAlly.GetComponent<ControlAlly>().NewSimulation();        
+        airEnemy.GetComponent<ControllEnemy>().NewAirSimulation();        
+        airAlly.GetComponent<ControlAlly>().NewAirSimulation();        
     }    
 
     private void ChangeSPSVOption(typeButtonSPSV typeButtonSPSV)

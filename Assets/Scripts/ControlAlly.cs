@@ -67,7 +67,7 @@ public class ControlAlly : MonoBehaviour
         enemyRotateAirCraft = enemyAirCraft.GetComponent<RotateAirCraft>();               
     }    
 
-    public void NewSimulation()
+    public void NewAirSimulation()
     {
         nowFigure = figure.emptyDiamond;
         uiManager.ChangeFigura(nowFigure);
@@ -78,7 +78,7 @@ public class ControlAlly : MonoBehaviour
         rotateAirCraft.NewSimulation(defaultRotation, 4);        
         moveAirCraft.SetSpeed(defaultSpeed);
         soundManager.NewSimulation();
-        uiManager.NewSimulation();
+        uiManager.NewAirSimulation();
         if (timeCoro != null) StopCoroutine(timeCoro);
         timeCoro = StartCoroutine(TimeCoroutine());
         animator.SetTrigger("Start");        

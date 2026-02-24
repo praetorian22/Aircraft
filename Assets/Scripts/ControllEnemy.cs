@@ -16,7 +16,7 @@ public class ControllEnemy : MonoBehaviour
         moveAirCraft = GetComponent<MoveAirCraft>();
     }
 
-    public void NewSimulation()
+    public void NewAirSimulation()
     {
         rotateAirCraft.NewSimulation(defaultRotation, 6);
         moveAirCraft.SetSpeed(defaultSpeed);
