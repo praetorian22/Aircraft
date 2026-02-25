@@ -52,17 +52,39 @@ public class UIManager : MonoBehaviour
 
     private Dictionary<int, List<Image>> sectorDict = new Dictionary<int, List<Image>>();
     [SerializeField] private List<Text> textDisplay_1 = new List<Text>();
+    [SerializeField] private List<Text> textDisplay_2 = new List<Text>();
+    [SerializeField] private List<Text> textDisplay_3 = new List<Text>();
     private string TA;
     private string ACS;
     private string AS;
     private string GOT;
     private string FID;
     private float timer;
+    private float timerZnak;
     private Coroutine timerDisp1Coro;
     private int indexSelectorDisp_1;
     private typeInputDisp1 tpInputDisp1;
     private List<string> fidAlpha = new List<string>();
+    private bool znakButtonPress;
 
+    private bool SVS;
+    private bool AZN;
+    private bool OTV;
+    private typeInputDisp3 tpInputDisp3;
+    private int indexSPS;
+    private List<string> VV = new List<string>() { "ÕŒ–Ã", "¬€ÿ≈", "Õ»∆≈"};
+    private int indexVV;
+    private List<string> ABS = new List<string>() { "Œ“Õ", "¿¡—"};
+    private int indexABS;
+    private List<string> TRF = new List<string>() { "¿¬“Œ", " ¬ À" };
+    private int indexTRF;
+    private int dist;
+    private int minH;
+    private int maxH;
+    private int indexSelectorDisp_3;
+
+    [SerializeField] private List<GameObject> greenButtons = new List<GameObject>();
+    private int indexGreenButtonList;
 
     private figure nowFigure;
     private SceneManager sceneManager;
@@ -70,6 +92,7 @@ public class UIManager : MonoBehaviour
     private typeButtonSPSV sPSVNow;
     private Coroutine testPressCoro;
     private Coroutine airSceneCoro;
+    private Coroutine znakPressCoro;
 
     public Action<typeButtonSPSV> changeTypeSPVSEvent;
     public Action airButtonPressEvent;
@@ -106,9 +129,26 @@ public class UIManager : MonoBehaviour
         ACS = "ACS 2000";
         AS = "AS  2000";
         GOT = "√Œ“ 2000";
-        FID = "00000000";
+        FID = "00000000";                
         tpInputDisp1 = typeInputDisp1.empty;
         SPSVButtonPressed(2);
+        textDisplay_2[3].text = " ";
+        textDisplay_2[4].text = " ";
+        textDisplay_2[5].text = " ";
+        textDisplay_2[1].text = "1";
+        textDisplay_2[7].text = "1";
+        tpInputDisp3 = typeInputDisp3.def;
+        indexVV = 0;
+        indexABS = 0;
+        indexTRF = 0;
+        dist = 100;
+        minH = 50;
+        maxH = 100;
+        indexSPS = 0;
+        indexGreenButtonList = 0;
+        textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+        textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
+        ChangeSPS();
     }
     public void NewAirSimulation()
     {
@@ -678,6 +718,17 @@ public class UIManager : MonoBehaviour
             {
                 SetTASetting();
             }
+            if (znakButtonPress)
+            {
+                textDisplay_1[3].text = "*";
+                textDisplay_1[3].GetComponent<Animator>().SetTrigger("On");
+            }
+            else
+            {
+                textDisplay_1[3].text = " ";
+                textDisplay_1[3].GetComponent<Animator>().SetTrigger("Off");
+                if (znakPressCoro != null) StopCoroutine(znakPressCoro);
+            }
         }
         
         /*
@@ -722,6 +773,17 @@ public class UIManager : MonoBehaviour
             textDisplay_1[6].text = str[6].ToString();
             textDisplay_1[7].text = str[7].ToString();
         }
+        if (numDisplay == 3)
+        {
+            textDisplay_3[0].text = str[0].ToString();
+            textDisplay_3[1].text = str[1].ToString();
+            textDisplay_3[2].text = str[2].ToString();
+            textDisplay_3[3].text = str[3].ToString();
+            textDisplay_3[4].text = str[4].ToString();
+            textDisplay_3[5].text = str[5].ToString();
+            textDisplay_3[6].text = str[6].ToString();
+            textDisplay_3[7].text = str[7].ToString();
+        }
     }
     private void DisplayToString(int numDisplay, ref string str)
     {
@@ -735,7 +797,17 @@ public class UIManager : MonoBehaviour
     {
         if (tpInputDisp1 == typeInputDisp1.empty)
         {
+            if (!znakButtonPress)
+            {
+                textDisplay_1[3].text = " ";
+                textDisplay_1[3].GetComponent<Animator>().SetTrigger("Off");
+                if (znakPressCoro != null) StopCoroutine(znakPressCoro);
+            }
             tpInputDisp1 = typeInputDisp1.kod;
+            if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+            {
+                textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+            }
             StringToDisplay(1, "A   " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text);
             indexSelectorDisp_1 = 4;
             textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("On");
@@ -751,7 +823,15 @@ public class UIManager : MonoBehaviour
     {
         if (tpInputDisp1 == typeInputDisp1.empty)
         {
+            textDisplay_1[3].text = " ";
+            textDisplay_1[3].GetComponent<Animator>().SetTrigger("Off");
+            if (znakPressCoro != null) StopCoroutine(znakPressCoro);
+            
             tpInputDisp1 = typeInputDisp1.fid;
+            if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+            {
+                textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+            }
             StringToDisplay(1, FID);
             indexSelectorDisp_1 = 0;
             textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("On");
@@ -774,19 +854,83 @@ public class UIManager : MonoBehaviour
                 textDisplay_1[indexSelectorDisp_1].text = "0";
             timer = 0;
         }
-        if (tpInputDisp1 == typeInputDisp1.fid)
+        else
         {
-            int index = fidAlpha.IndexOf(textDisplay_1[indexSelectorDisp_1].text);
-            if (index < fidAlpha.Count - 1)
+            if (tpInputDisp1 == typeInputDisp1.fid)
             {
-                textDisplay_1[indexSelectorDisp_1].text = fidAlpha[index + 1];
+                int index = fidAlpha.IndexOf(textDisplay_1[indexSelectorDisp_1].text);
+                if (index < fidAlpha.Count - 1)
+                {
+                    textDisplay_1[indexSelectorDisp_1].text = fidAlpha[index + 1];
+                }
+                else
+                {
+                    textDisplay_1[indexSelectorDisp_1].text = fidAlpha[0];
+                }
+                timer = 0;
             }
             else
             {
-                textDisplay_1[indexSelectorDisp_1].text = fidAlpha[0];
+                if (tpInputDisp3 == typeInputDisp3.r1)
+                {
+                    if (dist < 200) dist += 25;
+                    ChangeSPS();
+                }
+                if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+                {
+                    
+                    if (int.Parse(textDisplay_3[indexSelectorDisp_3].text) < 9)
+                        textDisplay_3[indexSelectorDisp_3].text = (int.Parse(textDisplay_3[indexSelectorDisp_3].text) + 1).ToString();
+                    else
+                        textDisplay_3[indexSelectorDisp_3].text = "0";
+                    if (tpInputDisp3 == typeInputDisp3.r2)
+                    {
+                        maxH = int.Parse(textDisplay_3[2].text + textDisplay_3[3].text + textDisplay_3[4].text);
+                        if (maxH > 127)
+                        {
+                            textDisplay_3[2].text = "1";
+                            textDisplay_3[3].text = "2";
+                            textDisplay_3[4].text = "7";
+                            maxH = 127;
+                        }
+                        if (maxH < 27)
+                        {
+                            textDisplay_3[2].text = "0";
+                            textDisplay_3[3].text = "2";
+                            textDisplay_3[4].text = "7";
+                            maxH = 27;
+                        }
+                    }
+                    if (tpInputDisp3 == typeInputDisp3.r3)
+                    {
+                        minH = int.Parse(textDisplay_3[2].text + textDisplay_3[3].text + textDisplay_3[4].text);
+                        if (minH > 127)
+                        {
+                            textDisplay_3[2].text = "1";
+                            textDisplay_3[3].text = "2";
+                            textDisplay_3[4].text = "7";
+                            minH = 127;
+                        }
+                        if (minH < 27)
+                        {
+                            textDisplay_3[2].text = "0";
+                            textDisplay_3[3].text = "2";
+                            textDisplay_3[4].text = "7";
+                            minH = 27;
+                        }
+                    }
+                }
+                if (tpInputDisp3 == typeInputDisp3.r4)
+                {
+                    if (indexTRF < 1)
+                        indexTRF++;
+                    else
+                        indexTRF = 0;
+                    StringToDisplay(3, "“–‘ " + TRF[indexTRF]);
+                }            
             }
-            timer = 0;
         }
+        
     }
     public void PressDownButton()
     {
@@ -800,19 +944,87 @@ public class UIManager : MonoBehaviour
                 textDisplay_1[indexSelectorDisp_1].text = "7";
             timer = 0;
         }
-        if (tpInputDisp1 == typeInputDisp1.fid)
+        else
         {
-            int index = fidAlpha.IndexOf(textDisplay_1[indexSelectorDisp_1].text);
-            if (index > 0)
+            if (tpInputDisp1 == typeInputDisp1.fid)
             {
-                textDisplay_1[indexSelectorDisp_1].text = fidAlpha[index - 1];
+                int index = fidAlpha.IndexOf(textDisplay_1[indexSelectorDisp_1].text);
+                if (index > 0)
+                {
+                    textDisplay_1[indexSelectorDisp_1].text = fidAlpha[index - 1];
+                }
+                else
+                {
+                    textDisplay_1[indexSelectorDisp_1].text = fidAlpha[fidAlpha.Count - 1];
+                }
+                timer = 0;
             }
             else
             {
-                textDisplay_1[indexSelectorDisp_1].text = fidAlpha[fidAlpha.Count - 1];
+                if (tpInputDisp3 == typeInputDisp3.r1)
+                {
+                    if (dist > 0) dist -= 25;
+                    ChangeSPS();
+                }
+                if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+                {
+                    if (int.Parse(textDisplay_3[indexSelectorDisp_3].text) > 0)
+                    {
+                        textDisplay_3[indexSelectorDisp_3].text = (int.Parse(textDisplay_3[indexSelectorDisp_3].text) - 1).ToString();
+                    }                        
+                    else
+                    {
+                        textDisplay_3[indexSelectorDisp_3].text = "9";
+                    }
+
+                    if (tpInputDisp3 == typeInputDisp3.r2)
+                    {
+                        maxH = int.Parse(textDisplay_3[2].text + textDisplay_3[3].text + textDisplay_3[4].text);
+                        if (maxH > 127)
+                        {
+                            textDisplay_3[2].text = "1";
+                            textDisplay_3[3].text = "2";
+                            textDisplay_3[4].text = "7";
+                            maxH = 127;
+                        }
+                        if (maxH < 27)
+                        {
+                            textDisplay_3[2].text = "0";
+                            textDisplay_3[3].text = "2";
+                            textDisplay_3[4].text = "7";
+                            maxH = 27;
+                        }
+                    }
+                    if (tpInputDisp3 == typeInputDisp3.r3)
+                    {
+                        minH = int.Parse(textDisplay_3[2].text + textDisplay_3[3].text + textDisplay_3[4].text);
+                        if (minH > 127)
+                        {
+                            textDisplay_3[2].text = "1";
+                            textDisplay_3[3].text = "2";
+                            textDisplay_3[4].text = "7";
+                            minH = 127;
+                        }
+                        if (minH < 27)
+                        {
+                            textDisplay_3[2].text = "0";
+                            textDisplay_3[3].text = "2";
+                            textDisplay_3[4].text = "7";
+                            minH = 27;
+                        }
+                    }
+                }
+                if (tpInputDisp3 == typeInputDisp3.r4)
+                {
+                    if (indexTRF > 0)
+                        indexTRF--;
+                    else
+                        indexTRF = 1;
+                    StringToDisplay(3, "“–‘ " + TRF[indexTRF]);
+                }
             }
-            timer = 0;
         }
+        
     }
     public void PressLeftButton()
     {
@@ -825,15 +1037,30 @@ public class UIManager : MonoBehaviour
             textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("On");
             timer = 0;
         }
-        if (tpInputDisp1 == typeInputDisp1.fid)
+        else
         {
-            textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
-            if (indexSelectorDisp_1 > 0)
-                indexSelectorDisp_1 = indexSelectorDisp_1 - 1;
-            else indexSelectorDisp_1 = 7;
-            textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("On");
-            timer = 0;
+            if (tpInputDisp1 == typeInputDisp1.fid)
+            {
+                textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
+                if (indexSelectorDisp_1 > 0)
+                    indexSelectorDisp_1 = indexSelectorDisp_1 - 1;
+                else indexSelectorDisp_1 = 7;
+                textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("On");
+                timer = 0;
+            }
+            else
+            {
+                if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+                {
+                    textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+                    if (indexSelectorDisp_3 > 2)
+                        indexSelectorDisp_3 = indexSelectorDisp_3 - 1;
+                    else indexSelectorDisp_3 = 4;
+                    textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("On");
+                }
+            }
         }
+        
     }
     public void PressRightButton()
     {
@@ -846,15 +1073,30 @@ public class UIManager : MonoBehaviour
             textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("On");
             timer = 0;
         }
-        if (tpInputDisp1 == typeInputDisp1.fid)
+        else
         {
-            textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
-            if (indexSelectorDisp_1 < 7)
-                indexSelectorDisp_1 = indexSelectorDisp_1 + 1;
-            else indexSelectorDisp_1 = 0;
-            textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("On");
-            timer = 0;
+            if (tpInputDisp1 == typeInputDisp1.fid)
+            {
+                textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
+                if (indexSelectorDisp_1 < 7)
+                    indexSelectorDisp_1 = indexSelectorDisp_1 + 1;
+                else indexSelectorDisp_1 = 0;
+                textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("On");
+                timer = 0;
+            }
+            else
+            {
+                if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+                {
+                    textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+                    if (indexSelectorDisp_3 < 4)
+                        indexSelectorDisp_3 = indexSelectorDisp_3 + 1;
+                    else indexSelectorDisp_3 = 2;
+                    textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("On");
+                }
+            }
         }
+        
     }
     public void PressVVODButton()
     {
@@ -882,6 +1124,10 @@ public class UIManager : MonoBehaviour
             }
             textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
             tpInputDisp1 = typeInputDisp1.empty;
+            if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+            {
+                textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("On");
+            }
             if (timerDisp1Coro != null) StopCoroutine(timerDisp1Coro);
             timerDisp1Coro = null;
             timer = 100;
@@ -907,9 +1153,24 @@ public class UIManager : MonoBehaviour
             }            
             textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
             tpInputDisp1 = typeInputDisp1.empty;
+            if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+            {
+                textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("On");
+            }
             if (timerDisp1Coro != null) StopCoroutine(timerDisp1Coro);
             timerDisp1Coro = null;
             timer = 100;
+        }
+        if (znakButtonPress)
+        {
+            textDisplay_1[3].text = "*";
+            textDisplay_1[3].GetComponent<Animator>().SetTrigger("On");
+        }
+        else
+        {
+            textDisplay_1[3].text = " ";
+            textDisplay_1[3].GetComponent<Animator>().SetTrigger("Off");
+            if (znakPressCoro != null) StopCoroutine(znakPressCoro);
         }
     }
     private IEnumerator TimerDisp1Coro()
@@ -939,9 +1200,220 @@ public class UIManager : MonoBehaviour
         textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
         timerDisp1Coro = null;
         tpInputDisp1 = typeInputDisp1.empty;
+        if (tpInputDisp3 == typeInputDisp3.r2 || tpInputDisp3 == typeInputDisp3.r3)
+        {
+            textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("On");
+        }
+        if (znakButtonPress)
+        {
+            textDisplay_1[3].text = "*";
+            textDisplay_1[3].GetComponent<Animator>().SetTrigger("On");
+        }
+        else
+        {
+            textDisplay_1[3].text = " ";
+            textDisplay_1[3].GetComponent<Animator>().SetTrigger("Off");
+            if (znakPressCoro != null) StopCoroutine(znakPressCoro);
+        }
     }
-    /*
-    private void TestPress()
+    public void PressZnakButton()
+    {
+        if (tpInputDisp1 == typeInputDisp1.empty)
+        {
+            znakButtonPress = !znakButtonPress;
+            if (znakButtonPress)
+            {
+                textDisplay_1[3].text = "*";
+                textDisplay_1[3].GetComponent<Animator>().SetTrigger("On");
+            }
+            else
+            {
+                if (znakPressCoro != null) StopCoroutine(znakPressCoro);
+                znakPressCoro = StartCoroutine(ZnakPressCoro());
+            }
+        }        
+    }
+    private IEnumerator ZnakPressCoro()
+    {
+        timerZnak = 0;
+        while (timerZnak < 18)
+        {
+            yield return new WaitForSeconds(0.1f);
+            timerZnak += 0.1f;
+        }
+        textDisplay_1[3].text = " ";
+        textDisplay_1[3].GetComponent<Animator>().SetTrigger("Off");
+    }
+    public void PressSVSButton()
+    {
+        SVS = !SVS;
+        if (SVS)
+           textDisplay_2[7].text = "2";
+        else
+           textDisplay_2[7].text = "1";        
+    }
+    public void PressAZNButton()
+    {
+        AZN = !AZN;
+        if (AZN)
+        {
+            textDisplay_2[3].text = "A";
+            textDisplay_2[4].text = "«";
+            textDisplay_2[5].text = "Õ";
+        }            
+        else
+        {
+            textDisplay_2[3].text = " ";
+            textDisplay_2[4].text = " ";
+            textDisplay_2[5].text = " ";
+        }
+    }
+    public void PressOTVButton()
+    {
+        OTV = !OTV;
+        if (OTV)
+        {
+            textDisplay_2[1].text = "2";            
+        }
+        else
+        {
+            textDisplay_2[1].text = "1";            
+        }
+    }
+    public void PressSPSButton()
+    {
+        if (indexSPS < 4)
+            indexSPS++;
+        else
+            indexSPS = 0;
+        ChangeSPS();
+    }
+    public void PressVV()
+    {
+        if (tpInputDisp3 == typeInputDisp3.def)
+        {
+            if (indexVV < 2)
+                indexVV++;
+            else
+                indexVV = 0;
+            ChangeSPS();
+        }
+        
+    }
+    public void PressABS()
+    {
+        if (tpInputDisp3 == typeInputDisp3.def)
+        {
+            if (indexABS < 1)
+                indexABS++;
+            else
+                indexABS = 0;
+            ChangeSPS();
+        }
+            
+    }
+    
+    private void ChangeSPS()
+    {
+        switch (indexSPS)
+        {
+            case 0:
+                {
+                    textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+                    tpInputDisp3 = typeInputDisp3.def;
+                    string s;
+                    s = VV[indexVV] + " " + ABS[indexABS];
+                    StringToDisplay(3, s);                    
+                    break;
+                }
+            case 1:
+                {
+                    textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+                    tpInputDisp3 = typeInputDisp3.r1;
+                    string s = "        ";
+                    if (dist < 10) s = "ƒ   " + dist.ToString() + " " + "ÃÃ";
+                    if (dist < 100 && dist > 10) s = "ƒ  " + dist.ToString() + " " + "ÃÃ";
+                    if (dist >= 100) s = "ƒ " + dist.ToString() + " " + "ÃÃ";
+                    StringToDisplay(3, s);
+                    break;
+                }
+            case 2:
+                {
+                    if (indexSelectorDisp_3 != 2) textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+                    tpInputDisp3 = typeInputDisp3.r2;
+                    indexSelectorDisp_3 = 2;
+                    string s = "A     FL";
+                    StringToDisplay(3, s);
+                    string s2 = maxH.ToString();
+                    if (tpInputDisp1 == typeInputDisp1.empty)
+                        textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("On");
+                    if (maxH >= 100)
+                    {
+                        textDisplay_3[2].text = s2[0].ToString();
+                        textDisplay_3[3].text = s2[1].ToString();
+                        textDisplay_3[4].text = s2[2].ToString();
+                    }
+                    else
+                    {
+                        if (maxH >= 10)
+                        {
+                            textDisplay_3[2].text = "0";
+                            textDisplay_3[3].text = s2[0].ToString();
+                            textDisplay_3[4].text = s2[1].ToString();
+                        }
+                        else
+                        {
+                            textDisplay_3[2].text = "0";
+                            textDisplay_3[3].text = "0";
+                            textDisplay_3[4].text = s2[0].ToString();
+                        }
+                    }                    
+                    break;
+                }
+            case 3:
+                {
+                    if (indexSelectorDisp_3 != 2) textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+                    tpInputDisp3 = typeInputDisp3.r3;
+                    indexSelectorDisp_3 = 2;
+                    string s = "B     FL";
+                    StringToDisplay(3, s);
+                    string s2 = minH.ToString();
+                    if (tpInputDisp1 == typeInputDisp1.empty)
+                        textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("On");
+                    if (minH >= 100)
+                    {
+                        textDisplay_3[2].text = s2[0].ToString();
+                        textDisplay_3[3].text = s2[1].ToString();
+                        textDisplay_3[4].text = s2[2].ToString();
+                    }
+                    else
+                    {
+                        if (minH >= 10)
+                        {
+                            textDisplay_3[2].text = "0";
+                            textDisplay_3[3].text = s2[0].ToString();
+                            textDisplay_3[4].text = s2[1].ToString();
+                        }
+                        else
+                        {
+                            textDisplay_3[2].text = "0";
+                            textDisplay_3[3].text = "0";
+                            textDisplay_3[4].text = s2[0].ToString();
+                        }
+                    }
+                    break;
+                }
+            case 4:
+                {
+                    textDisplay_3[indexSelectorDisp_3].GetComponent<Animator>().SetTrigger("Off");
+                    tpInputDisp3 = typeInputDisp3.r4;
+                    StringToDisplay(3, "“–‘ " + TRF[indexTRF]);
+                    break;
+                }
+        }
+    }
+    
+    public void TestPress()
     {
         if (testPressCoro != null) StopCoroutine(testPressCoro);
         testPressCoro = StartCoroutine(TestPressCoro());
@@ -949,12 +1421,34 @@ public class UIManager : MonoBehaviour
     
     private IEnumerator TestPressCoro()
     {
-        yield return new WaitForSeconds(5f);
-        SPSVButtonTestImage.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        SPSVButtonTestImage.SetActive(false);
+        indexGreenButtonList = 0;
+        while (indexGreenButtonList < greenButtons.Count - 5)
+        {
+            greenButtons[indexGreenButtonList].SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            greenButtons[indexGreenButtonList].SetActive(false);
+            indexGreenButtonList++;
+        }
+        greenButtons[indexGreenButtonList + 4].SetActive(true);
+        greenButtons[indexGreenButtonList + 3].SetActive(true);
+        greenButtons[indexGreenButtonList + 2].SetActive(true);
+        greenButtons[indexGreenButtonList + 1].SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        greenButtons[indexGreenButtonList + 4].SetActive(false);
+        greenButtons[indexGreenButtonList + 3].SetActive(false);
+        greenButtons[indexGreenButtonList + 2].SetActive(false);
+        greenButtons[indexGreenButtonList + 1].SetActive(false);
     }
-    */
+    public void PressButtonAndGreenLight(GameObject light)
+    {
+        StartCoroutine(LightCoro(light));
+    }
+    private IEnumerator LightCoro(GameObject gameObject)
+    {
+        gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.05f);
+        gameObject.SetActive(false);
+    }
 }
 
 public enum typeButtonSPSV
@@ -971,5 +1465,13 @@ public enum typeInputDisp1
     kod,
     fid,
     empty,
+}
+public enum typeInputDisp3
+{
+    def,
+    r1,
+    r2,
+    r3,
+    r4,
 }
 
