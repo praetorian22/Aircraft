@@ -9,8 +9,8 @@ public class ControllSimulation : MonoBehaviour
     [SerializeField] private GameObject pointAirEnemy;
     [SerializeField] private GameObject pointAirAlly;
     [SerializeField] private GameObject airEnemy;
-    [SerializeField] private GameObject airAlly;
-    
+    [SerializeField] private GameObject airAlly;    
+
     private UIManager uIManager;
     
     private SoundManager soundManager;
@@ -34,19 +34,23 @@ public class ControllSimulation : MonoBehaviour
         uIManager = GetComponent<UIManager>();        
         uIManager.changeTypeSPVSEvent += ChangeSPSVOption;
         uIManager.airButtonPressEvent += StartAirScene;
+        
     }
 
     public void StartAirScene()
     {
         ResetAirSimulation();
     }
+    
 
     private void Update()
     {
+        /*
         if (Input.GetKey("escape"))  
         {
             Application.Quit();    
         }
+        */
     }
 
     public void ResetAirSimulation()
@@ -57,8 +61,8 @@ public class ControllSimulation : MonoBehaviour
         airAlly.transform.position = pointAirAlly.transform.position;
         airEnemy.GetComponent<ControllEnemy>().NewAirSimulation();        
         airAlly.GetComponent<ControlAlly>().NewAirSimulation();        
-    }    
-
+    }   
+    
     private void ChangeSPSVOption(typeButtonSPSV typeButtonSPSV)
     {
         switch (typeButtonSPSV)

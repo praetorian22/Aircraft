@@ -13,5 +13,6 @@ public enum scenes
     mainMenu,
     airGame,
     groundGame,
-    landingGame,    
+    landingGame,
+    gliss,
 }

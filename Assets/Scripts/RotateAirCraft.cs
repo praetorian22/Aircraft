@@ -18,6 +18,8 @@ public class RotateAirCraft : MonoBehaviour
     public bool MoveUp => angleNow > 360;
     public bool MoveDown => angleNow < 360;
     public bool MoveForward => angleNow == 360;
+    public bool AngleSlinkRate => angleNow <= 350 && angleNow > 345;
+    public bool AnglePullUp => angleNow <= 345;
 
     public bool AngleLimit => angleNow == angleTarget;
 
@@ -43,7 +45,14 @@ public class RotateAirCraft : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
         this.speedRotation = speedRotation;
     }
-
+    public void InAirPort(float speedRotation, int defAngleIndex)
+    {
+        //angleNow = targetAngleList[defAngleIndex];
+        angleTarget = targetAngleList[defAngleIndex];
+        index = defAngleIndex;
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+        this.speedRotation = speedRotation;
+    }
     private void Update()
     {
         if (Mathf.Abs(angleNow - angleTarget) > 0.1f)

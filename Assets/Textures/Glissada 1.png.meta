@@ -1,0 +1,1275 @@
+fileFormatVersion: 2
+guid: 29948634438b81a4a81c2fb930bd9803
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Glissada_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa6ea561b19e67642847a16e6952a28d
+      internalID: 2043532612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_1
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d46e3ab41d3e23844a75c92cb66a31f7
+      internalID: -1162054489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_2
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb820b243f21a3c41ae32a11543508d4
+      internalID: 896498165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_3
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f727d0a44daf6094ea7199569f7a1da3
+      internalID: 1579823784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_4
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89e479f30b01c8e429f4ff1325cb1f54
+      internalID: -1600459296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_5
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54fd3378afd9de241bfbd5d8ff06225e
+      internalID: -1167666231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_6
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51cc52344de89294fa6e093ba406f3b9
+      internalID: -743463780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_7
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ed0b6b9689ca1a479a18e9d7ac5b4f1
+      internalID: 1948295106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_8
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e305a7d059454408fbe4f1cc4e4d81
+      internalID: 190793455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_9
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b75acddcf1f53942a7797f2d0bd2fc6
+      internalID: -36826591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_10
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d1e0411163e68c42947db91f836286b
+      internalID: -2115394344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_11
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b9c5a71a0f61b74fb76d06c451d3427
+      internalID: 1604717854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_12
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e6e965b7e1586f488cf7b9b0ebbb397
+      internalID: -1785743821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_13
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a15ea814aa870546942072d0a98fbff
+      internalID: 194806884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_14
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41085189f6c9b3448856ac64542d3803
+      internalID: -1844648194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_15
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd394b4e4b9498142ab0831c2b843249
+      internalID: -1189346953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_16
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1684681181466134a94a989e0d09dd06
+      internalID: -1484266561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_17
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fd0906fe6947554993c185b569f138b
+      internalID: 1308759390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_18
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 649944a7917172044bb41543d3bb341d
+      internalID: -1524050258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_19
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24edb974f1162a643befdc174dbcdde1
+      internalID: 1895792094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_20
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 174fc28737300c949bd5a836b3c16c02
+      internalID: 984684472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_21
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09d0b74f0d7ee0f4f8c70472ce7d93cc
+      internalID: 1016627119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_22
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54eadf32269f19c41a42d386fbca32df
+      internalID: -509925551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_23
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eb69fa927ef650479cf7a174ab3ced4
+      internalID: 98540677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_24
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a4fbc0c30b6bfb4e962e7897e252c54
+      internalID: 956470131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_25
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f15e3ac9ca989e14c9af85d8204605c1
+      internalID: -1230617247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_26
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eecd9f5092d03b45b9452614862e39c
+      internalID: -35524243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_27
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b35b36b8b07aa004d86b49f4a7aa4596
+      internalID: -1520350033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_28
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 669145f27c2333b408bef50e50ece38e
+      internalID: -1010426540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_29
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5db2d6dc0b9ea4c4191f28e992850180
+      internalID: -2128010907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_30
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef907744b67fad348a4cb5b07729d429
+      internalID: 125829882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_31
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 945ca533cfc4924449094fa902cd963c
+      internalID: -491175923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_32
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61f81e0628ee3584eaa0fd3a823b87ad
+      internalID: -242263182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_33
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: deede5a2057a8584fa6cb05bdaf9b7ca
+      internalID: -1226468721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_34
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 115ea5ae9cc6f754fb8219a930ef24e9
+      internalID: -1476784772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_35
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b077c860169768f49b9b610249b0e362
+      internalID: -1624368777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_36
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a3e51cafb21aeb4a8530235d9f14289
+      internalID: -1700232201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_37
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e097f1360b03be64b990e4573b1c578f
+      internalID: -1378048542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_38
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e654c0ca4c93b654fb22990f80500644
+      internalID: -2085178599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_39
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d949cbe5e36ac4facefca44a1919b9
+      internalID: -915376627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_40
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9d0ae93d8b583242a0c2422aeadb0ad
+      internalID: -1131379326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_41
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bcf1cee39e228e44a424afd588e554f
+      internalID: -47957566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_42
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e29946d6204c283479236319d8caf568
+      internalID: 1200411578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_43
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: deb549373561cde4388328c0c229b772
+      internalID: -1690240783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_44
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bbf6b177c4d18144accfd44320c8189
+      internalID: 2147470075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_45
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 612948a61df22984aa0c25c90146bc52
+      internalID: 2044480005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_46
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdf636afe346a3d4cab199caf9718cd9
+      internalID: -322810095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_47
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3c2d8fdd574ec44da14ef99db966077
+      internalID: 1373697720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_48
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c22fda9fcc6efb247889c8e5a7a5eec8
+      internalID: 1494463921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_49
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50d323b20a47e3344bf1085e49107d49
+      internalID: 816861201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glissada_50
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 15.58
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa6696b622d03b346baa63a18096836a
+      internalID: -646144330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Glissada_0: 2043532612
+      Glissada_1: -1162054489
+      Glissada_10: -2115394344
+      Glissada_11: 1604717854
+      Glissada_12: -1785743821
+      Glissada_13: 194806884
+      Glissada_14: -1844648194
+      Glissada_15: -1189346953
+      Glissada_16: -1484266561
+      Glissada_17: 1308759390
+      Glissada_18: -1524050258
+      Glissada_19: 1895792094
+      Glissada_2: 896498165
+      Glissada_20: 984684472
+      Glissada_21: 1016627119
+      Glissada_22: -509925551
+      Glissada_23: 98540677
+      Glissada_24: 956470131
+      Glissada_25: -1230617247
+      Glissada_26: -35524243
+      Glissada_27: -1520350033
+      Glissada_28: -1010426540
+      Glissada_29: -2128010907
+      Glissada_3: 1579823784
+      Glissada_30: 125829882
+      Glissada_31: -491175923
+      Glissada_32: -242263182
+      Glissada_33: -1226468721
+      Glissada_34: -1476784772
+      Glissada_35: -1624368777
+      Glissada_36: -1700232201
+      Glissada_37: -1378048542
+      Glissada_38: -2085178599
+      Glissada_39: -915376627
+      Glissada_4: -1600459296
+      Glissada_40: -1131379326
+      Glissada_41: -47957566
+      Glissada_42: 1200411578
+      Glissada_43: -1690240783
+      Glissada_44: 2147470075
+      Glissada_45: 2044480005
+      Glissada_46: -322810095
+      Glissada_47: 1373697720
+      Glissada_48: 1494463921
+      Glissada_49: 816861201
+      Glissada_5: -1167666231
+      Glissada_50: -646144330
+      Glissada_6: -743463780
+      Glissada_7: 1948295106
+      Glissada_8: 190793455
+      Glissada_9: -36826591
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

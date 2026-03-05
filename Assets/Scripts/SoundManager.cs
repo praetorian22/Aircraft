@@ -20,14 +20,26 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip descent_descent_now;
     [SerializeField] private AudioClip clear_of_conflict;
     [SerializeField] private AudioClip maintain_vertical_speed;
+    [SerializeField] private AudioClip slink_rate;
+    [SerializeField] private AudioClip pull_up;
+    [SerializeField] private AudioClip terrain_terrain;
+    [SerializeField] private AudioClip too_low_terrain;
+    [SerializeField] private AudioClip too_low_gear;
+    [SerializeField] private AudioClip caution_terrain;
+    [SerializeField] private AudioClip terrain_terrain_pull_up;
+    [SerializeField] private AudioClip clide_slope;
 
     private bool taSPSV;
+    private bool soundOff;
 
     public void NewSimulation()
     {
         typeTrack = typeTrack.none;        
     }
-
+    public void SetAudioSource(AudioSource audioSource)
+    {
+        this.audioSource = audioSource;
+    }
     private void MakeSound(AudioClip original, Vector3 position)
     {
         AudioSource.PlayClipAtPoint(original, position, volumeSound);
@@ -92,19 +104,56 @@ public class SoundManager : MonoBehaviour
     {
         if (typeTrack != typeTrack.maintain_vertical_speed) MakeSoundCicle(maintain_vertical_speed);
     }
+    public void SoundSlinkRate()
+    {
+        if (typeTrack != typeTrack.slink_rate) MakeSoundCicle(slink_rate);
+    }
+    public void SoundPullUp()
+    {
+        if (typeTrack != typeTrack.pull_up) MakeSoundCicle(pull_up);
+    }
+    public void Terrain_Terrain()
+    {
+        if (typeTrack != typeTrack.terrain_terrain) MakeSoundCicle(terrain_terrain);
+    }
+    public void Too_Low_Terrain()
+    {
+        if (typeTrack != typeTrack.too_low_terrain) MakeSoundCicle(too_low_terrain);
+    }
+    public void Too_Low_Gear()
+    {
+        if (typeTrack != typeTrack.too_low_gear) MakeSoundCicle(too_low_gear);
+    }
+    public void CautionTerrain()
+    {
+        if (typeTrack != typeTrack.caution_terrain) MakeSoundCicle(caution_terrain);
+    }
+    public void TerrainTerrainPullUp()
+    {
+        if (typeTrack != typeTrack.terrain_terrain_pull_up) MakeSoundCicle(terrain_terrain_pull_up);
+    }
+    public void ClideSlope()
+    {
+        if (typeTrack != typeTrack.clide_slope) MakeSoundCicle(clide_slope);
+    }
 
     public void SoundOff()
     {
+        soundOff = true;
         volumeSound = 0f;
         StopSound();
     }
 
     public void SoundOn()
     {
-        volumeSound = 0.8f;
+        soundOff = false;
+        volumeSound = 0.3f;
         StopSound();
     }
-
+    public void SetVolume(float value)
+    {
+        if (!soundOff) volumeSound = value;
+    }
     public void TaSPSVOn()
     {
         taSPSV = true;
@@ -130,4 +179,12 @@ public enum typeTrack
     clear_of_conflict,
     maintain_vertical_speed,
     none,
+    slink_rate,
+    pull_up,
+    terrain_terrain,
+    too_low_terrain,
+    too_low_gear,
+    caution_terrain,
+    terrain_terrain_pull_up,
+    clide_slope,
 }

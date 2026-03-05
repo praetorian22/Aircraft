@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
     //[SerializeField] private List<Image> sectors_25_30down = new List<Image>();
 
     [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject arrow2;
+    [SerializeField] private GameObject arrow3;
     [SerializeField] private float angleNow;
 
     [SerializeField] private Image figureObject;
@@ -88,14 +90,28 @@ public class UIManager : MonoBehaviour
 
     private figure nowFigure;
     private SceneManager sceneManager;
+    [SerializeField] private GameObject SPSV;
 
     private typeButtonSPSV sPSVNow;
     private Coroutine testPressCoro;
     private Coroutine airSceneCoro;
+    private Coroutine groundSceneCoro;
+    private Coroutine glissSceneCoro;
     private Coroutine znakPressCoro;
+
+    [SerializeField] private Slider slider;
+    [SerializeField] private Text hight;
+    [SerializeField] private Text hight1;
+
+    public float Hight => float.Parse(hight.text);
+    public float Hight1 => float.Parse(hight1.text);
 
     public Action<typeButtonSPSV> changeTypeSPVSEvent;
     public Action airButtonPressEvent;
+    public Action groundButtonPressEvent;
+    public Action glissButtonPressEvent;
+    public Action<float> changeSliderEvent;
+    public Action shassiEvent;
     private void Awake()
     {
         SPSVButtonImageDict.Add(typeButtonSPSV.√Œ“, SPSVButtonImage[0]);
@@ -105,8 +121,26 @@ public class UIManager : MonoBehaviour
         fidAlpha = new List<string> { "0", "1","2", "3", "4", "5", "6", "7", "8", "9",
         "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U",
         "V","W","X","Y","Z"};
+        SPSV.SetActive(false);
+        sceneManager.SetScene(scenes.mainMenu);
+        exitButton.interactable = true;
+        airButton.interactable = true;
+        groundButton.interactable = true;
     }
-
+    public void PressMainMenuButton()
+    {
+        exitButton.interactable = true;
+        airButton.interactable = true;
+        groundButton.interactable = true;
+        SPSV.SetActive(false);
+        sceneManager.SetScene(scenes.mainMenu);
+        if (airSceneCoro != null) StopCoroutine(airSceneCoro);
+        if (groundSceneCoro != null) StopCoroutine(groundSceneCoro);
+    }
+    public void PressQuitButton()
+    {
+        Application.Quit();
+    }
     public void PressAirButton()
     {
         exitButton.interactable = false;
@@ -115,14 +149,48 @@ public class UIManager : MonoBehaviour
         if (airSceneCoro != null) StopCoroutine(airSceneCoro);
         airSceneCoro = StartCoroutine(AirSceneCoro());
     }
-
+    public void PressGroundButton()
+    {
+        exitButton.interactable = false;
+        airButton.interactable = false;
+        groundButton.interactable = false;
+        if (groundSceneCoro != null) StopCoroutine(groundSceneCoro);
+        groundSceneCoro = StartCoroutine(GroundSceneCoro());
+    }
+    public void PressGlissButton()
+    {
+        exitButton.interactable = false;
+        airButton.interactable = false;
+        groundButton.interactable = false;
+        if (glissSceneCoro != null) StopCoroutine(glissSceneCoro);
+        glissSceneCoro = StartCoroutine(GlissSceneCoro());
+        
+    }
     private IEnumerator AirSceneCoro()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+        SPSV.SetActive(true);
         sceneManager.SetScene(scenes.airGame);
         yield return null;
         airButtonPressEvent?.Invoke();
     }
+    private IEnumerator GroundSceneCoro()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SPSV.SetActive(true);
+        sceneManager.SetScene(scenes.groundGame);
+        yield return null;
+        groundButtonPressEvent?.Invoke();
+    }
+    private IEnumerator GlissSceneCoro()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SPSV.SetActive(true);
+        sceneManager.SetScene(scenes.gliss);
+        yield return null;
+        glissButtonPressEvent?.Invoke();
+    }
+
     private void ResetSPSV()
     {
         TA = "TA  2000";
@@ -150,6 +218,20 @@ public class UIManager : MonoBehaviour
         textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
         ChangeSPS();
     }
+    public void SetHight(float value)
+    {
+        hight.text = ((int)value).ToString();
+        hight1.text = ((int)value).ToString();
+    }
+    
+    public void ChangeSlider()
+    {
+        changeSliderEvent?.Invoke(slider.value);
+    }
+    public void SetSliderPositionZero()
+    {
+        slider.value = 0;
+    }
     public void NewAirSimulation()
     {
         //SPSVButtonPressed((int)typeButtonSPSV.√Œ“);        
@@ -160,7 +242,18 @@ public class UIManager : MonoBehaviour
         angleNow = 360;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
     }
-
+    public void NewGroundSimulation()
+    {
+        ResetSPSV();
+        angleNow = 360;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+    }
+    public void NewGlissSimulation()
+    {
+        ResetSPSV();
+        angleNow = 360;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+    }
     public void ChangeFigura(figure nowFigure)
     {
         figureObject.sprite = figures[(int)nowFigure];
@@ -611,6 +704,8 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+        arrow2.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
+        arrow3.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleNow));
     }
 
     public void TranslateAngleArrow(float angle)
@@ -670,7 +765,120 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    public void TranslateAngleArrow2(float angle)
+    {
+        if (angle < 360f && angle >= 355f)
+        {
+            angleNow = 360 - (angle - 360) * 12;
+        }
+        else
+        {
+            if (angle < 355f && angle >= 350f)
+            {
+                angleNow = 60 - (angle - 355) * 8;                
+            }
+            else
+            {
+                if (angle < 350f && angle >= 345f)
+                {
+                    angleNow = -20 - (angle - 370) * 6;                    
+                }
+                else
+                {
+                    if (angle < 345f && angle >= 330f)
+                    {                        
+                        angleNow = 40 - (angle - 375) * 3;
+                    }
+                    else
+                    {
+                        if (angle > 360f && angle <= 365f)
+                        {
+                            angleNow = (360 - angle) * 12;
+                        }
+                        else
+                        {
+                            if (angle > 365f && angle <= 370f)
+                            {
+                                angleNow = 20 + (355 - angle) * 8;
+                            }
+                            else
+                            {
+                                if (angle > 370f && angle <= 375f)
+                                {
+                                    angleNow = 20 + (350 - angle) * 6;
+                                }
+                                else
+                                {
+                                    if (angle > 375f && angle <= 390f)
+                                    {
+                                        angleNow = -40 + (345 - angle) * 3f;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
+                }
+            }
+        }
+    }
+    public void TranslateAngleArrow3(float angle)
+    {
+        if (angle < 360f && angle >= 355f)
+        {
+            angleNow = 360 - (angle - 360) * 12;
+        }
+        else
+        {
+            if (angle < 355f && angle >= 350f)
+            {
+                angleNow = 60 - (angle - 355) * 8;
+            }
+            else
+            {
+                if (angle < 350f && angle >= 345f)
+                {
+                    angleNow = -20 - (angle - 370) * 6;
+                }
+                else
+                {
+                    if (angle < 345f && angle >= 330f)
+                    {
+                        angleNow = 40 - (angle - 375) * 3;
+                    }
+                    else
+                    {
+                        if (angle > 360f && angle <= 365f)
+                        {
+                            angleNow = (360 - angle) * 12;
+                        }
+                        else
+                        {
+                            if (angle > 365f && angle <= 370f)
+                            {
+                                angleNow = 20 + (355 - angle) * 8;
+                            }
+                            else
+                            {
+                                if (angle > 370f && angle <= 375f)
+                                {
+                                    angleNow = 20 + (350 - angle) * 6;
+                                }
+                                else
+                                {
+                                    if (angle > 375f && angle <= 390f)
+                                    {
+                                        angleNow = -40 + (345 - angle) * 3f;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
     public void AllIndicatorsOff()
     {
         variometrIndicationOff.SetActive(true);  
@@ -718,6 +926,10 @@ public class UIManager : MonoBehaviour
             {
                 SetTASetting();
             }
+            if ((int)sPSVNow < 3)
+            {
+                changeTypeSPVSEvent?.Invoke(sPSVNow);
+            }
             if (znakButtonPress)
             {
                 textDisplay_1[3].text = "*";
@@ -729,19 +941,7 @@ public class UIManager : MonoBehaviour
                 textDisplay_1[3].GetComponent<Animator>().SetTrigger("Off");
                 if (znakPressCoro != null) StopCoroutine(znakPressCoro);
             }
-        }
-        
-        /*
-        if ((int)sPSVNow < 3)
-        {
-            SPSVOptionImage.GetComponent<Image>().sprite = SPSVButtonImageDict[sPSVNow];
-            changeTypeSPVSEvent?.Invoke(sPSVNow);
-        }
-        else
-        {
-            TestPress();
-        }
-        */
+        } 
     }
     private void SetTASetting()
     {
@@ -1102,6 +1302,7 @@ public class UIManager : MonoBehaviour
     {
         if (tpInputDisp1 == typeInputDisp1.kod)
         {
+            /* Old Version
             if (sPSVNow == typeButtonSPSV.√Œ“)
             {
                 GOT = "√Œ“ " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
@@ -1121,6 +1322,37 @@ public class UIManager : MonoBehaviour
             {
                 TA = "TA  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
                 SetTASetting();
+            }
+            */
+            if (sPSVNow == typeButtonSPSV.√Œ“)
+            {
+                GOT = "√Œ“ " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                ACS = "ACS " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                AS = "AS  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                TA = "TA  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+
+                SetGotSetting();
+            }
+            if (sPSVNow == typeButtonSPSV.ACS)
+            {
+                GOT = "√Œ“ " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                ACS = "ACS " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                AS = "AS  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                TA = "TA  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text; SetACSSetting();
+            }
+            if (sPSVNow == typeButtonSPSV.AS)
+            {
+                GOT = "√Œ“ " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                ACS = "ACS " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                AS = "AS  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                TA = "TA  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text; SetASSetting();
+            }
+            if (sPSVNow == typeButtonSPSV.TA)
+            {
+                GOT = "√Œ“ " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                ACS = "ACS " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                AS = "AS  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text;
+                TA = "TA  " + textDisplay_1[4].text + textDisplay_1[5].text + textDisplay_1[6].text + textDisplay_1[7].text; SetTASetting();
             }
             textDisplay_1[indexSelectorDisp_1].GetComponent<Animator>().SetTrigger("Off");
             tpInputDisp1 = typeInputDisp1.empty;
@@ -1448,6 +1680,10 @@ public class UIManager : MonoBehaviour
         gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(0.05f);
         gameObject.SetActive(false);
+    }
+    public void PressShassiButton()
+    {
+        shassiEvent?.Invoke();
     }
 }
 

@@ -65,8 +65,11 @@ public class ControlAlly : MonoBehaviour
         rotateAirCraft = GetComponent<RotateAirCraft>();
         rotateAirCraft.changeAngleEvent += uiManager.TranslateAngleArrow;
         enemyRotateAirCraft = enemyAirCraft.GetComponent<RotateAirCraft>();               
-    }    
-
+    }
+    private void OnEnable()
+    {
+        soundManager.SetAudioSource(gameObject.GetComponent<AudioSource>());
+    }
     public void NewAirSimulation()
     {
         nowFigure = figure.emptyDiamond;
